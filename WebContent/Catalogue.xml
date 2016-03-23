@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet type="text/xsl" href="Catalogue.xsl"?>
+
+<application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="CatalogueSchema.xsd">
+	<catalogue dateCreation="2015-10-01">
+		<personne>
+			<nomP>toto</nomP>
+			<prenomP>titi</prenomP>
+		</personne>
+		<theme>CatalogueManil</theme>
+		
+		<photo datePrise="2015-10-01" lieu="Bordeaux">
+			<img>http://www.bordeaux-tourisme.com/var/ezwebin_site/storage/images/media/images/sites-monuments/place-de-la-bourse-2/6505-1-fre-FR/Place-de-la-Bourse-2_format_780x490.jpg</img>
+			<dateAjout>2015-10-01</dateAjout>
+			<titre>Quai_Bordeaux.jpg</titre>
+			<dimension>3000*2000</dimension>
+			<resolution>300</resolution>
+			<categorie>Loisirs</categorie>
+			<commentaire>il faisait beau</commentaire>
+			<note>12</note>
+			<sommeVotes>22</sommeVotes>
+			<nbVotes>21</nbVotes>
+			<personne>
+				<nomP>toto</nomP>
+				<prenomP>titi</prenomP>
+				<idP>1</idP>
+				<email>mok@hj.xom</email>
+			</personne>
+		</photo>
+		
+		<photo datePrise="2015-09-01" lieu="Bordeaux">
+			<img>http://monumentsdeparis.net/content/tour-eiffel.jpg</img>
+			<dateAjout>2014-01-30</dateAjout>
+			<titre>Quai_Bordeaux2.jpg</titre>
+			<dimension>1500*1000</dimension>
+			<resolution>300</resolution>
+			<categorie>Loisirs</categorie>
+			<commentaire>il faisait beau</commentaire>
+			<note>12</note>
+			<sommeVotes>22</sommeVotes>
+			<nbVotes>21</nbVotes>
+			<personne>
+				<nomP>toto</nomP>
+				<prenomP>titi</prenomP>
+				<idP>1</idP>
+				<email>mok@hj.xom</email>
+			</personne>
+		</photo>
+		 
+	</catalogue>
+	
+<!-- 	<catalogue prenomAuteur="Gabi" nomAuteur="Aut" dateCreation="2003-07-21">
+	
+		<nomCat>CatalogueGabi</nomCat>
+		<dateModif>2012-08-20</dateModif>
+		
+		<photo datePrise="20177-10-20" lieu="Panam" prenomAuteur="John" nomAuteur="Tom">
+			<img>http://www.voyage-new-york.net/images/tourisme/statue-de-la-liberte.JPG</img>
+			<dateAjout>2015-10-01</dateAjout>
+			<dateModif>2015-10-01</dateModif>
+			<titre>Quai_Panam.jpg</titre>
+			<dimension>3000*1000</dimension>
+			<resolution>250</resolution>
+			<categorie>Loisirs</categorie>
+			<commentaire>il faisait moche</commentaire>
+		</photo>
+		
+		<photo datePrise="2015-11-07" lieu="Panam" prenomAuteur="Toto" nomAuteur="tim">
+			<img>https://www.u-bordeaux.fr/bundles/nubcore/images/logo.svg</img>
+			<dateAjout>2005-04-20</dateAjout>
+			<dateModif>2010-09-21</dateModif>
+			<titre>Quai_Paris2.jpg</titre>
+			<dimension>1500*1000</dimension>
+			<resolution>300</resolution>
+			<categorie>Loisirs</categorie>
+			<commentaire>il faisait beau</commentaire>
+		</photo>
+		
+	</catalogue>
+	 -->
+</application>

@@ -1,7 +1,6 @@
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
@@ -39,11 +38,13 @@ public class Gallerie {
 	
 	public void majGallerie(){
 		final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-try {
-			
+		Document document = null;
+		try {
 			final DocumentBuilder builder = factory.newDocumentBuilder();
-
-			final Document document= (Document) builder.parse(new File("/Users/Imen/Desktop/M1_Cours/XML/Eclipse EE/Nouveau dossier/Catal/WebContent/Catalogue.xml"));
+			String path = this.getClass().getResource("/").getPath();
+			System.out.println(path);
+			path = path.replace("WEB-INF/classes","");
+			document= builder.parse(new File(path+"Catalogue.xml"));
 
 			final Element racine = document.getDocumentElement();
 

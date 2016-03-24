@@ -1,5 +1,3 @@
-
-
 public final class Photo{
     private String datePrise;
     private String lieu;

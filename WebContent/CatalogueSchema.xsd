@@ -12,16 +12,16 @@
 	      				<xs:sequence>
 	        				<xs:element type="xs:string" name="nomP" minOccurs='1' maxOccurs='1'/>
 	        				<xs:element type="xs:string" name="prenomP" minOccurs='1' maxOccurs='1'/>
+	        				<xs:element type="xs:string" name="email" minOccurs='0' maxOccurs='1'/>
 	  					</xs:sequence>
 	  				</xs:complexType>
 	  			</xs:element>
-	        <xs:element type="xs:string" name="theme" minOccurs='1' maxOccurs='1'/>
 	        <xs:element name="photo" minOccurs="0" maxOccurs="1000">
 	          <xs:complexType mixed="true">
 	            <xs:sequence>
 	              <xs:element type="xs:anyURI" name="img"/>
 	              <xs:element type="xs:date" name="dateAjout"/>
-	              <xs:element type="xs:string" name="titre"/>
+	              <!-- <xs:element type="xs:string" name="titre"/> -->
 	              <xs:element type="xs:string" name="dimension"/> <!--  a vérifer -->
 	              <xs:element type="xs:decimal" name="resolution"/>
 	              <xs:element type="xs:string" name="categorie"/>
@@ -35,7 +35,6 @@
 	      				<xs:sequence>
 	        				<xs:element type="xs:string" name="nomP" minOccurs='1' maxOccurs='1'/>
 	        				<xs:element type="xs:string" name="prenomP" minOccurs='1' maxOccurs='4'/>
-	        				<xs:element type="xs:decimal" name="idP" minOccurs='1' maxOccurs='1'/>
 	        				<xs:element type="xs:string" name="email" minOccurs='1' maxOccurs='1'/>
 	  					</xs:sequence>
 	  				</xs:complexType>
@@ -43,10 +42,12 @@
 	            </xs:sequence>
 	            <xs:attribute type="xs:date" name="datePrise"/>
 	            <xs:attribute type="xs:string" name="lieu"/>
+	            <xs:attribute type="xs:string" name="titre" use='required'/>
 	        </xs:complexType>
 	        </xs:element>
 	      </xs:sequence>
 	      <xs:attribute type="xs:date" name="dateCreation" use='required'/>
+	      <xs:attribute type="xs:string" name="theme" use='required'/>
 	    </xs:complexType>
 	  </xs:element>
 	 </xs:sequence>

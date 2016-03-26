@@ -16,6 +16,7 @@
 <%--         <p>Nom : ${ gallerie.catalogues.get(0).theme }</p> --%>
 <%--         <p>Email : ${ gallerie.catalogues.get(0).auteur.nomP}</p> --%>
        
+        <p>${toto}</p>
         <c:forEach items="${gallerie.catalogues}" var="cat">
     		<p>${cat.theme}</p>
     		<p></p>

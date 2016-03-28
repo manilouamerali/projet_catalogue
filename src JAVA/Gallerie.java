@@ -30,7 +30,8 @@ import org.xml.sax.SAXException;
 public class Gallerie {
 	
 	private static List<Catalogue> catalogues=new ArrayList<Catalogue>();
-	
+	private static Map < Personne , List < Photo > > photosAuteur =new Hashtable<Personne , List < Photo > >();
+
 	public List<Catalogue> getCatalogues() {
 		return catalogues;
 	}
@@ -171,7 +172,6 @@ public class Gallerie {
 		
 	}
 	
-	private static Map < Personne , List < Photo > > photosAuteur =new Hashtable<Personne , List < Photo > >();
 
 	public void majGallerie(){
 		
@@ -183,7 +183,7 @@ public class Gallerie {
 			String path = this.getClass().getResource("/").getPath();
 			System.out.println(path);
 			path = path.replace("WEB-INF/classes","");
-			document= builder.parse(new File(path+"Catalogue.xml"));
+			document= builder.parse(new File("C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/"+"Catalogue.xml"));
 			
 			final Element racine = document.getDocumentElement();
 

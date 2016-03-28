@@ -39,6 +39,7 @@ public class Application extends HttpServlet {
 		/* Stockage du formulaire et du bean dans l'objet request */
 //      request.setAttribute( "message", "creation avec succes");
 		String choix = request.getParameter( "nom" );
+		System.out.println(choix);
 		request.setAttribute( "toto", choix );
 		Gallerie gallerie=new Gallerie();
 		gallerie.majGallerie();

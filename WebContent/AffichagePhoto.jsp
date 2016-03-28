@@ -16,16 +16,35 @@
 <%--         <p>Nom : ${ gallerie.catalogues.get(0).theme }</p> --%>
 <%--         <p>Email : ${ gallerie.catalogues.get(0).auteur.nomP}</p> --%>
        
-        <p>${toto}</p>
+<%--         <p>${toto}</p> --%>
+        <form action="AffichageCatalogue" method="post">
         <c:forEach items="${gallerie.catalogues}" var="cat">
     		<p>${cat.theme}</p>
-    		<p></p>
-    		<c:forEach items="${cat.photos}" var="photo">
-	        	<p>${photo.lieu}</p>
-	        	<p>${photo.titre}</p>
-	        	<img src="${photo.img}"/>
-	        	<p></p>
+    		
+<!--     		<a href="/AfficherCatalogue.jsp">  -->
+<%--     			<input type="image" src="${cat.photos.get(0).img}"  value="${cat.photos.get(0).titre}" name="nomPhoto"  id="nomPhoto" > --%>
+<%--     			<jsp:forward page="AfficherCatalogue.jsp" > --%>
+<%-- 					<jsp:param name="parameterName" value="{ cat }" /> --%>
+<%-- 				</jsp:forward> --%>
+<!--     		</a> -->
+    			
+    			
+    			<input type="image" src="${cat.photos.get(0).img}" name="themeCatalogue" value="${cat.theme}"/>
+    			<input type="hidden" name="themeCatalogue" value="${cat.theme}"/>
+				<input type="submit" name="nom" value="Afficher ce catalogue" />
+				
+<%--     			<jsp:forward page="AfficherCatalogue.jsp" > --%>
+<%-- 					<jsp:param name="parameterName" value="{ cat }" /> --%>
+<%-- 				</jsp:forward> --%>
     		</c:forEach>
-		</c:forEach>
+		</form>
+    					
+<%--     		<c:forEach items="${cat.photos}" var="photo"> --%>
+<%-- 	        	<p>${photo.lieu}</p> --%>
+<%-- 	        	<p>${photo.titre}</p> --%>
+<%-- 	        	<img src="${photo.img}"/> --%>
+<!-- 	        	<p></p> -->
+<%--     		</c:forEach> --%>
+		
     </body>
 </html>

@@ -1,6 +1,6 @@
-
-
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.jws.WebMethod;
 import javax.jws.WebResult;
@@ -44,12 +44,13 @@ public class Application extends HttpServlet {
 		gallerie.majGallerie();
 		request.setAttribute( "gallerie", gallerie);
 		
+		List<Catalogue> lCata  = gallerie.getCatalogues();
+		Iterator i = lCata.iterator();
+		Catalogue Cata = (Catalogue) i.next();
+		Photo p = new Photo();
+		Cata.ecrireXML(p);
+		
 		this.getServletContext().getRequestDispatcher( "/AffichagePhoto.jsp" ).forward( request, response );
 	}	
-	
-	
-	
 	//@WebMethod
-    
-	
 }

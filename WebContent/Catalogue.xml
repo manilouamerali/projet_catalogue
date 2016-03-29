@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="CatalogueSchema.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="CatalogueSchema.xsd">
 	<catalogue dateCreation="2015-10-01" theme="CatalogueManil">
 		<personne>
 			<nomP>toto</nomP>
 			<prenomP>titi</prenomP>
 			<email>mok@hj.xom</email>
 		</personne>
-		
 		<photo datePrise="2015-10-01" lieu="Bordeaux" titre="Bordeaux.jpg">
 			<img>http://www.bordeaux-tourisme.com/var/ezwebin_site/storage/images/media/images/sites-monuments/place-de-la-bourse-2/6505-1-fre-FR/Place-de-la-Bourse-2_format_780x490.jpg</img>
 			<dateAjout>2015-10-01</dateAjout>

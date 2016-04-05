@@ -22,7 +22,7 @@ import javax.xml.ws.ResponseWrapper;
 
 public class Application extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+    private static String VUE="/AffichageGallerie.jsp";   
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -38,14 +38,34 @@ public class Application extends HttpServlet {
 
 		/* Stockage du formulaire et du bean dans l'objet request */
 //      request.setAttribute( "message", "creation avec succes");
-		String choix = request.getParameter( "nom" );
-		System.out.println(choix);
-		request.setAttribute( "toto", choix );
-		Gallerie gallerie=new Gallerie();
-		gallerie.majGallerie();
+		Gallerie gallerie=Gallerie.getInstance();
+		
+		
+		String choix = request.getParameter( "action" );
+		switch (choix){
+			case "supprimerCatalogue":
+				gallerie.supprimerCatalogue(request.getParameter( "themeCatalogue" ));
+				break;
+			case "supprimerPhoto":
+				gallerie.supprimerPhoto(request.getParameter( "themeCatalogue" ), request.getParameter( "titrePhoto" ));
+				break;
+			case "ajoutPhoto":
+				VUE="/AjoutPhoto.jsp";
+				request.setAttribute( "theme",request.getParameter( "themeCatalogue" ));
+			case "nouvellePhoto":
+				Photo nvelleP=new Photo();
+				nvelleP.creerPhoto(request.getParameter( "datePrise"), request.getParameter( "lieu"), request.getParameter( " nomAuteur"),request.getParameter( "prenomAuteur"),request.getParameter( "emailAuteur"), 
+						request.getParameter( "titre"), request.getParameter( "dimension"), Integer.parseInt(request.getParameter( "resolution")), request.getParameter( "categorie"),
+						request.getParameter( "commentaire"),request.getParameter( "img"));
+				
+				gallerie.ajouterPhoto(request.getParameter( "themeCatalogue" ),nvelleP);
+				break;
+			default:
+				break;
+		}
 		request.setAttribute( "gallerie", gallerie);
 		
-		this.getServletContext().getRequestDispatcher( "/AffichagePhoto.jsp" ).forward( request, response );
+		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
 	}	
 	
 	

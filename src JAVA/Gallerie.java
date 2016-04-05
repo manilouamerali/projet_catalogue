@@ -32,6 +32,16 @@ public class Gallerie {
 	private static List<Catalogue> catalogues=new ArrayList<Catalogue>();
 	private static Map < Personne , List < Photo > > photosAuteur =new Hashtable<Personne , List < Photo > >();
 
+	private static Gallerie instance;
+	private Gallerie(){	}
+	public static Gallerie getInstance(){
+		 if (null == instance) { // Premier appel
+	            instance = new Gallerie();
+	            instance.majGallerie();
+	     }
+		 return instance;
+	}
+	
 	public List<Catalogue> getCatalogues() {
 		return catalogues;
 	}
@@ -59,14 +69,15 @@ public class Gallerie {
 			builder = factory.newDocumentBuilder();
 			String path = this.getClass().getResource("/").getPath();
 			path = path.replace("WEB-INF/classes","");
-			document= builder.parse(new File(path+"Catalogue.xml"));
-			
+			//document= builder.parse(new File(path+"Catalogue.xml"));
+			document= builder.parse(new File("C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/"+"Catalogue.xml"));
+
 			Source input = new DOMSource(document);
 			final Element racine = document.getDocumentElement();
 			
 			Node catalogue= racine.getFirstChild().getNextSibling(); 
 			while(catalogue != null){
-				System.out.println(catalogue.getNodeName());		
+				//System.out.println(catalogue.getNodeName());		
 				if (catalogue.getNodeType() == Node.ELEMENT_NODE) {//on est dans catalogue
 					Element eCata = (Element) catalogue;
 					if(eCata.getAttribute("theme").equals(themeCatalogue)){
@@ -74,7 +85,7 @@ public class Gallerie {
 						Node child = catalogue.getFirstChild().getNextSibling().getNextSibling().getNextSibling();
 						while(child != null){	
 							catalogue.removeChild(child);
-
+							
 //							if (child.getNodeType() == Node.ELEMENT_NODE) {//on est dans catalogue
 //								Element eElement = (Element) child;
 //								
@@ -95,6 +106,16 @@ public class Gallerie {
 								child = child.getNextSibling();
 					    }
 						racine.removeChild(catalogue);
+						for(Catalogue c: catalogues)
+							if(c.getTheme().equals(themeCatalogue)){				
+								for (Photo p: c.getPhotos()){
+									//un probleme lors de la lecture de p.getAuteur() 
+									photosAuteur.get(p.getAuteur()).remove(p);
+									c.retirerPhoto(p.getTitre());
+									
+								}
+								break;
+							}
 					}
 				}
 				if((catalogue = catalogue.getNextSibling())==null)
@@ -124,8 +145,9 @@ public class Gallerie {
 			builder = factory.newDocumentBuilder();
 			String path = this.getClass().getResource("/").getPath();
 			path = path.replace("WEB-INF/classes","");
-			document= builder.parse(new File(path+"Catalogue.xml"));
-			
+			//document= builder.parse(new File(path+"Catalogue.xml"));
+			document= builder.parse(new File("C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/"+"Catalogue.xml"));
+
 			Source input = new DOMSource(document);
 						
 			final Element racine = document.getDocumentElement();
@@ -143,7 +165,7 @@ public class Gallerie {
 								if(eElement.getAttribute("titre").equals(titrePhoto)){					
 									eElement.getParentNode().removeChild(eElement);
 									for(Catalogue c: catalogues)
-										if(c.getTheme().equals(themeCatalogue)){				
+										if(c.getTheme().equals(themeCatalogue)){			
 											Photo aRetirer;
 											aRetirer=c.retirerPhoto(titrePhoto);
 											photosAuteur.get(aRetirer.getAuteur()).remove(aRetirer);
@@ -292,5 +314,14 @@ public class Gallerie {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	public void ajouterPhoto(String theme, Photo nvelleP) {
+		for(Catalogue c: catalogues)
+			if(c.getTheme().equals(theme)){				
+				c.ecrireXML(nvelleP);
+				photosAuteur.get(nvelleP.getAuteur()).add(nvelleP);
+				break;
+			}
 	}
 }

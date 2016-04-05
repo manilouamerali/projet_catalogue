@@ -10,12 +10,30 @@
 </head>
 <body>
 
-	<c:forEach items="${catalogue.photos}" var="photo">
-       	<p>${photo.lieu}</p>
-       	<p>${photo.titre}</p>
-       	<img src="${photo.img}"/>
-       	<p></p>
-  	</c:forEach>
-    		
+		<p>${catalogue.theme}</p>
+		<c:forEach items="${catalogue.photos}" var="photo">
+			<form action="AffichagePhoto" method="post">
+				<img src="${photo.img}"/>
+   				<p>${photo.titre}</p>
+   				<input type="submit" name="titrePhoto" value="${photo.titre}">
+				<input type="hidden" name="themeCatalogue" value="${catalogue.theme}"/>
+			</form>
+	       	<p></p>	  		
+	  	</c:forEach>
+	
+	  	
+<!-- Bouton pour supprimer le catalogue -->
+
+	<form action="Application" method="post">
+		<input type="submit" name="supprimerCatalogue" value="Supprimer catalogue"/>
+		<input type="hidden" name="themeCatalogue" value="${catalogue.theme}"/>
+		<input type="hidden" name="action" value="supprimerCatalogue"/>
+	</form>
+	
+	<form action="AjouterPhoto" method="post">
+		<input type="submit" name="ajouterPhoto" value="Ajouter une photo"/>
+		<input type="hidden" name="themeCatalogue" value="${catalogue.theme}"/>
+	</form>
+		
 </body>
 </html>

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/AffichageCatalogue")
 public class AffichageCatalogue extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+	private static String VUE="/AffichageCatalogue.jsp" ;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -23,30 +23,23 @@ public class AffichageCatalogue extends HttpServlet {
     }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		String choix = request.getParameter( "themeCatalogue" );
-		System.out.println(choix);
-		Gallerie g=new Gallerie();
+	
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+    	String theme = request.getParameter( "themeCatalogue" );
+		//System.out.println(request.getParameter( "themeCatalogue" ));
+		Gallerie g=Gallerie.getInstance();
 		g.majGallerie();
-		for(Catalogue catalogue : g.getCatalogues())
-			if(catalogue.getTheme().equals(choix)){
-				request.setAttribute( "catalogue", catalogue);
+		
+		for(Catalogue c: g.getCatalogues())	
+			if(c.getTheme().equals(theme)){
+				request.setAttribute( "catalogue", c);
 				break;
 			}
 		
-		
-		this.getServletContext().getRequestDispatcher( "/AffichageCatalogue.jsp" ).forward( request, response );
+		this.getServletContext().getRequestDispatcher( VUE).forward( request, response );
 
 	}
 

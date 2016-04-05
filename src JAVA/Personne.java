@@ -4,9 +4,14 @@ public class Personne {
 	private String nomP;
 	private String prenomP;
 	private String email;
-	
 	public Personne(){
 		idP = cmp++;
+	}
+	public Personne(String _nomP,String _prenomP,String _email){
+		idP = cmp++;
+		nomP=_nomP;
+		prenomP=_prenomP;
+		email=_email;
 	}
 
 	public int getIdP() {

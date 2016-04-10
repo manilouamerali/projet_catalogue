@@ -22,7 +22,7 @@
 					<img src="${catalogue.photos.get(0).img}" width="300" height="250"/>	  
 				</c:if> 			
 				<p/>
-				<input type="submit" name="themeCatalogue" value="${catalogue.theme}">
+				<input type="submit" class="bouton" name="themeCatalogue" value="${catalogue.theme}">
 			</form>
 		</div>
 		</c:forEach>

@@ -8,6 +8,7 @@
 <html>
     <head>
         <title>Affichage de la gallerie</title>
+        <link rel="stylesheet" type="text/css" href="Style.css"/>
     </head>
     <body>
 	<h1 align="center">catalogues : </h1>

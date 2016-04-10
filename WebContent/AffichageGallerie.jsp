@@ -10,20 +10,23 @@
         <title>Affichage de la gallerie</title>
     </head>
     <body>
-		
+	<h1 align="center">catalogues : </h1>
+	<div class="galerie">	
         
 	    <c:forEach items="${gallerie.catalogues}" var="catalogue">
-	 		<p>${catalogue.theme}</p>
+	    	<div class="cata">
+	 	
 		    <form action="AffichageCatalogue" method="post">
 				<c:if test="${not empty catalogue.photos}">
-					<img src="${catalogue.photos.get(0).img}"/>	  
+					<img src="${catalogue.photos.get(0).img}" width="300" height="250"/>	  
 				</c:if> 			
 				<p/>
 				<input type="submit" name="themeCatalogue" value="${catalogue.theme}">
 			</form>
+		</div>
 		</c:forEach>
 		
-		
+	</div>	
 
 <!--    bouton ajouter un catalogue	 -->
     </body>

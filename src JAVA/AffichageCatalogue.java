@@ -31,7 +31,7 @@ public class AffichageCatalogue extends HttpServlet {
     	String theme = request.getParameter( "themeCatalogue" );
 		//System.out.println(request.getParameter( "themeCatalogue" ));
 		Gallerie g=Gallerie.getInstance();
-		g.majGallerie();
+//		g.majGallerie();
 		
 		for(Catalogue c: g.getCatalogues())	
 			if(c.getTheme().equals(theme)){

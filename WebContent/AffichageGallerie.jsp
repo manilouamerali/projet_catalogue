@@ -15,7 +15,9 @@
 	    <c:forEach items="${gallerie.catalogues}" var="catalogue">
 	 		<p>${catalogue.theme}</p>
 		    <form action="AffichageCatalogue" method="post">
-				<img src="${catalogue.photos.get(0).img}"/>	   			
+				<c:if test="${not empty catalogue.photos}">
+					<img src="${catalogue.photos.get(0).img}"/>	  
+				</c:if> 			
 				<p/>
 				<input type="submit" name="themeCatalogue" value="${catalogue.theme}">
 			</form>

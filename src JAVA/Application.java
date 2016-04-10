@@ -40,7 +40,6 @@ public class Application extends HttpServlet {
 //      request.setAttribute( "message", "creation avec succes");
 		Gallerie gallerie=Gallerie.getInstance();
 		
-		
 		String choix = request.getParameter( "action" );
 		switch (choix){
 			case "supprimerCatalogue":
@@ -59,6 +58,10 @@ public class Application extends HttpServlet {
 						request.getParameter( "commentaire"),request.getParameter( "img"));
 				
 				gallerie.ajouterPhoto(request.getParameter( "themeCatalogue" ),nvelleP);
+				break;
+			case "lancement":
+				gallerie.majGallerie();
+				VUE="/AffichageGallerie.jsp";
 				break;
 			default:
 				break;

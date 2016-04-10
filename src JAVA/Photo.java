@@ -16,6 +16,7 @@ public final class Photo{
     private String img;
     private int nbVotes;
     private int sommeVotes;
+    private String cat;
     
 	public String getDatePrise() {
 		return datePrise;
@@ -123,5 +124,11 @@ public final class Photo{
 		p.setSommeVotes(0);
 		
 		return p;
+	}
+	public String getCat() {
+		return cat;
+	}
+	public void setCat(String cat) {
+		this.cat = cat;
 	}
 }

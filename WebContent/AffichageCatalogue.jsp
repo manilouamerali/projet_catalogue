@@ -29,11 +29,16 @@
 		<input type="hidden" name="themeCatalogue" value="${catalogue.theme}"/>
 		<input type="hidden" name="action" value="supprimerCatalogue"/>
 	</form>
-	
+<!-- 	Bouton pour ajouter une nouvelle photo -->
 	<form action="AjouterPhoto" method="post">
 		<input type="submit" name="ajouterPhoto" value="Ajouter une photo"/>
 		<input type="hidden" name="themeCatalogue" value="${catalogue.theme}"/>
 	</form>
+<!-- Bouton pour revenir à la gallerie -->
+	<form method="post" action="Application">
+            <input type="hidden" name="action" value="lancement"/>
+            <input type="submit" name="nom" value="Retour à la Gallerie" >
+      </form>
 		
 </body>
 </html>

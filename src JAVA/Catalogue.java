@@ -61,11 +61,11 @@ public class Catalogue {
 	public Photo retirerPhoto(String titre){
 		Photo res=null;
 		for(Photo p: photos)
-		if(p.getTitre().equals(titre)){		
-			res=p;
-			photos.remove(p);
-			break;
-		}
+			if(p.getTitre().equals(titre)){		
+				res=p;
+				photos.remove(p);					
+				break;
+			}
 		return res;
 	}
 	

@@ -31,6 +31,7 @@ public class AffichagePhoto extends HttpServlet {
 		String titre=request.getParameter( "titrePhoto" );
 		Photo aAfficher=null;
 		Gallerie g=Gallerie.getInstance();
+		request.setAttribute( "catalogue",theme);
 		
 		for(Catalogue c: g.getCatalogues())
 			if(c.getTheme().equals(theme)){

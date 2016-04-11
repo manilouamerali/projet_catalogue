@@ -3,13 +3,14 @@
 <html>
     <head>
         <title>INSTAMIAGE</title>
+         <link rel="stylesheet" type="text/css" href="Style.css"/>
     </head>
-    <body>
-        <div>
+    <body class="dark-matter">
+        <div class="megabouton">
             <form method="post" action="Application">
             <input type="hidden" name="action" value="lancement"/>
-            <input type="submit" name="nom" value="Lancer l'application" >
+            <input type="submit" class="grosbouton" name="nom" value="Lancer l'application" >
             </form>
-        </div>
+       </div>
     </body>
 </html>

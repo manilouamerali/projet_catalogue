@@ -60,10 +60,11 @@ border-radius:7px;
 }
 
 .galerie img {
+margin-top: 15px;
 border-radius: 4px;
 }
 
-.galerie .bouton {
+.bouton {
     background: #FFCC02;
     border: none;
     padding: 10px 25px 10px 25px;
@@ -80,7 +81,7 @@ border-radius: 4px;
     -moz-box-shadow:1px 1px 1px #3D3D3D;
 }
 
-.galerie .bouton:hover {
+ .bouton:hover {
     background: #555;
    color : #F2F201;
    cursor:pointer;
@@ -188,12 +189,11 @@ border-radius: 4px;
 }
 
 .catalogue {
-	position:absolute;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 80%;
+	max-width:640px;
+margin: 0 auto;
+position:relative;
     background: #555;
-    padding: 20px 30px 20px 30px;
+    padding: 20px 10px 20px 20px;
     font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #D3D3D3;
     text-shadow: 1px 1px 1px #444;
@@ -206,15 +206,90 @@ border-radius: 4px;
 
 
 .catalogue .photo {
-	postition : relative;
+	
 border:1px solid black;
-display:inline;
+display:inline-block;
 margin-right : 10px;
+margin-top : 10px;
 float: left;
 width:200px;
 background: #555;
-text-align:center;
 border-radius:7px;
+text-align:center;
+vertical-align:middle;
 }
 
+
+.barre {
+width:600px;
+margin-left : 10px;
+position : relative;
+text-align:center;
+display:inline-block;
+}
+	
+ .boutons {
+margin-right: 10px; 
+margin-top: 30px;
+display:inline-block;
+vertical-align:middle;
+text-align:left;
+
+
+}
+
+.petitbouton {
+    background: #FFCC02;
+    border: none;
+    padding: 1px 2px 1px 2px;
+    color: #585858;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    text-shadow: 1px 1px 1px #FFE477;
+    font-weight: bold;
+    margin :5px 0px 5px 0px;
+    box-shadow: 1px 1px 1px #3D3D3D;
+    -webkit-box-shadow:1px 1px 1px #3D3D3D;
+    -moz-box-shadow:1px 1px 1px #3D3D3D;
+}
+
+.petitbouton:hover {
+    color: #333;
+    background-color: #EBEBEB;
+    cursor:pointer;
+}
+.titre {
+	color: #FFCC02;
+    padding: 10px 10px 10px 40px;
+    display: block;
+    border-bottom: 1px solid #444;
+    margin: -10px -30px 30px -30px;
+	
+}
+
+.megabouton {
+	 position:absolute;
+   top: 30%;
+    left: 40%;
+
+}
+.dark-matter .grosbouton {
+	width:150px;
+	height:150px;
+	background: #FFCC02;
+    color: #585858;
+    text-shadow: 1px 1px 1px #FFE477;
+    font-weight: bold;
+    box-shadow: 1px 1px 1px #3D3D3D;
+    -webkit-box-shadow:1px 1px 1px #3D3D3D;
+    -moz-box-shadow:1px 1px 1px #3D3D3D;
+	
+}
+
+.grosbouton:hover {
+    background: #555;
+   color :  #FFCC02;
+   cursor:pointer;
+}
 

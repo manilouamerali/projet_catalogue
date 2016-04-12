@@ -54,21 +54,18 @@ public class UploadPhoto extends HttpServlet {
 			while (iter.hasNext()) {
 				FileItem item = (FileItem) iter.next();
 				if (item.isFormField()) {
-					//nvelleP.creerPhoto(  request.getParameter( ),request.getParameter( ), 
-					//	request.getParameter( ), request.getParameter( ), , request.getParameter( "categorie"),
-					//request.getParameter( ),request.getParameter( ));
-				
+					
 					switch (item.getFieldName()){
-					case "themeCatalogue":theme=item.getString();System.out.println(item.getString());break;
-					case "datePrise":nvelleP.setDatePrise(item.getString());System.out.println(item.getString());break;
-					case "lieu":nvelleP.setLieu(item.getString());System.out.println(item.getString());break;
-					case "nomAuteur":nvellePers.setNomP(item.getString());System.out.println(item.getString());break;
-					case "prenomAuteur":nvellePers.setPrenomP(item.getString());System.out.println(item.getString());break;
-					case "emailAuteur":nvellePers.setEmail(item.getString());System.out.println(item.getString());break;
-					case "titre":nvelleP.setTitre(item.getString());System.out.println(item.getString());break;
-					case "commentaire":nvelleP.setCommentaire(item.getString());System.out.println(item.getString());break;
-					case "dimension":nvelleP.setDimension(item.getString());System.out.println(item.getString());break;
-					case "categorie":nvelleP.setCategorie(item.getString());System.out.println(item.getString());break;
+					case "themeCatalogue":theme=item.getString();break;
+					case "datePrise":nvelleP.setDatePrise(item.getString());break;
+					case "lieu":nvelleP.setLieu(item.getString());break;
+					case "nomAuteur":nvellePers.setNomP(item.getString());break;
+					case "prenomAuteur":nvellePers.setPrenomP(item.getString());break;
+					case "emailAuteur":nvellePers.setEmail(item.getString());break;
+					case "titre":nvelleP.setTitre(item.getString());break;
+					case "commentaire":nvelleP.setCommentaire(item.getString());break;
+					case "dimension":nvelleP.setDimension(item.getString());break;
+					case "categorie":nvelleP.setCategorie(item.getString());break;
 					}
 					
 				} else {
@@ -87,12 +84,13 @@ public class UploadPhoto extends HttpServlet {
 				}
 			}
 			gallerie.ajouterPhoto(theme,nvelleP);
+			Catalogue res=null;
 			for(Catalogue c: gallerie.getCatalogues())	
 				if(c.getTheme().equals(theme)){
-					request.setAttribute( "catalogue", c);
+					res=c;
 					break;
 				}
-			
+			request.setAttribute( "catalogue", res);
 			
 			
 			this.getServletContext().getRequestDispatcher( VUE).forward( request, response );

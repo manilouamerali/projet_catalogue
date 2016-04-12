@@ -82,8 +82,8 @@ public class Catalogue {
 	}
 
 	public void ecrireXML(Photo p){
-		final DocumentBuilderFactory factory  = DocumentBuilderFactory.newInstance();
 		try {
+			final DocumentBuilderFactory factory  = DocumentBuilderFactory.newInstance();
 			final DocumentBuilder builder = factory.newDocumentBuilder();
 			String path = this.getClass().getResource("/").getPath();
 			path = path.replace("/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/projet_catalogue/WEB-INF/classes","");
@@ -93,13 +93,14 @@ public class Catalogue {
 			Document document= builder.parse(new File(path+"Catalogue.xml"));
 
 			Source input = new DOMSource(document);
-			Result output = new StreamResult(new File(path+"Catalogue2.xml"));
-			Transformer transformer = null;
-			transformer = TransformerFactory.newInstance().newTransformer();
+			Result output = new StreamResult(new File(path+"Catalogue.xml"));
+			Transformer transformer = TransformerFactory.newInstance().newTransformer();
 			
-//			transformer.setOutputProperty(OutputKeys.METHOD,"xml");
+			transformer.setOutputProperty(OutputKeys.METHOD,"xml");
 //			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
-//			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+//		    transformer.setOutputProperty(OutputKeys.STANDALONE, "no");			
+//		    transformer.setOutputProperty(OutputKeys.VERSION, "1.0");
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
 //			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
 			Element racine = document.getDocumentElement();
 			
@@ -111,47 +112,44 @@ public class Catalogue {
 					System.out.println("Parcours des catalogues : "+ eNoeud.getAttribute("theme"));
 					if(eNoeud.getAttribute("theme").equals(this.theme)){
 						Element newP = document.createElement("photo");
-						newP.setAttribute("datePrise", p.getDatePrise());
+//						newP.setAttribute("datePrise", p.getDatePrise());
 						newP.setAttribute("titre", p.getTitre());
 						Element nInfo = document.createElement("img");
-						nInfo.appendChild(document.createTextNode(p.getImg()));
+						nInfo.appendChild(document.createTextNode(p.getTitre()));
 						newP.appendChild(nInfo);
-						nInfo = document.createElement("dateAjout");
-						nInfo.appendChild(document.createTextNode(p.getDateAjout()));
-						newP.appendChild(nInfo);
-						nInfo = document.createElement("dimension");
-						nInfo.appendChild(document.createTextNode(p.getDimension()));
-						newP.appendChild(nInfo);
-						
-						nInfo = document.createElement("resolution");
-						nInfo.appendChild(document.createTextNode(Integer.toString(p.getResolution())));
-						newP.appendChild(nInfo);
-						nInfo = document.createElement("categorie");
-						nInfo.appendChild(document.createTextNode(p.getCategorie()));
-						newP.appendChild(nInfo);
-						nInfo = document.createElement("commentaire");
-						nInfo.appendChild(document.createTextNode(p.getCommentaire()));
-						newP.appendChild(nInfo);
-						
-						nInfo = document.createElement("note");
-						nInfo.appendChild(document.createTextNode(Integer.toString(0)));
-						newP.appendChild(nInfo);
-						nInfo = document.createElement("sommeVotes");
-						nInfo.appendChild(document.createTextNode(Integer.toString(0)));
-						newP.appendChild(nInfo);
-						nInfo = document.createElement("nbVotes");
-						nInfo.appendChild(document.createTextNode(Integer.toString(0)));
-						newP.appendChild(nInfo);
-						Element nP = document.createElement("personne");
-						newP.appendChild(nP);
-						nInfo = document.createElement("nomP");
-						nP.appendChild(nInfo);
-						nInfo = document.createElement("prenomP");
-						nP.appendChild(nInfo);
-						nInfo = document.createElement("email");
-						nP.appendChild(nInfo);		
+//						nInfo = document.createElement("dimension");
+//						nInfo.appendChild(document.createTextNode(p.getDimension()));
+//						newP.appendChild(nInfo);
+//						
+//						nInfo = document.createElement("resolution");
+//						nInfo.appendChild(document.createTextNode(Integer.toString(p.getResolution())));
+//						newP.appendChild(nInfo);
+//						nInfo = document.createElement("categorie");
+//						nInfo.appendChild(document.createTextNode(p.getCategorie()));
+//						newP.appendChild(nInfo);
+//						nInfo = document.createElement("commentaire");
+//						nInfo.appendChild(document.createTextNode(p.getCommentaire()));
+//						newP.appendChild(nInfo);
+//						
+//						nInfo = document.createElement("note");
+//						nInfo.appendChild(document.createTextNode(Integer.toString(0)));
+//						newP.appendChild(nInfo);
+//						nInfo = document.createElement("sommeVotes");
+//						nInfo.appendChild(document.createTextNode(Integer.toString(0)));
+//						newP.appendChild(nInfo);
+//						nInfo = document.createElement("nbVotes");
+//						nInfo.appendChild(document.createTextNode(Integer.toString(0)));
+//						newP.appendChild(nInfo);
+//						Element nP = document.createElement("personne");
+//						newP.appendChild(nP);
+//						nInfo = document.createElement("nomP");
+//						nP.appendChild(nInfo);
+//						nInfo = document.createElement("prenomP");
+//						nP.appendChild(nInfo);
+//						nInfo = document.createElement("email");
+//						nP.appendChild(nInfo);		
 						eNoeud.appendChild(newP);
-						System.out.println(newP.getNodeName());
+//						System.out.println(newP.getNodeName());
 					}
 				}
 				noeud = noeud.getNextSibling();

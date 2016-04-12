@@ -317,6 +317,7 @@ public class Gallerie {
 			if(c.getTheme().equals(theme)){				
 				c.ecrireXML(nvelleP);
 				//photosAuteur.get(nvelleP.getAuteur()).add(nvelleP);
+				c.getPhotos().add(nvelleP);
 				break;
 			}
 	}

@@ -27,7 +27,7 @@ public class AjouterPhoto extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String VUE="/AjoutPhoto.jsp";
-		request.setAttribute( "theme",request.getParameter( "themeCatalogue" ));	
+		request.setAttribute( "theme",request.getParameter( "themeCatalogue" ));
 		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
 
 	}

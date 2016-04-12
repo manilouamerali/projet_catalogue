@@ -6,8 +6,8 @@
 			<email>mok@hj.xom</email>
 		</personne>
 		
-		<photo datePrise="2015-10-01" lieu="Bordeaux" titre="Bordeaux.jpg">
-			<img>http://www.bordeaux-tourisme.com/var/ezwebin_site/storage/images/media/images/sites-monuments/place-de-la-bourse-2/6505-1-fre-FR/Place-de-la-Bourse-2_format_780x490.jpg</img>
+		<photo datePrise="2015-10-01" lieu="Bordeaux" titre="Tour_Eiffel.jpg">
+			<img>Tour_Eiffel.jpg</img>
 			<dateAjout>2015-10-01</dateAjout>
 			<dimension>3000*2000</dimension>
 			<resolution>300</resolution>
@@ -22,8 +22,8 @@
 				<email>mok@hj.xom</email>
 			</personne>
 		</photo>
-		<photo datePrise="2015-10-01" lieu="Bordeaux" titre="Bordeauxx.jpg">
-			<img>http://www.bordeaux-tourisme.com/var/ezwebin_site/storage/images/media/images/sites-monuments/place-de-la-bourse-2/6505-1-fre-FR/Place-de-la-Bourse-2_format_780x490.jpg</img>
+		<photo datePrise="2015-10-01" lieu="Bordeaux" titre="statuedelaliberte.jpg">
+			<img>statuedelaliberte.jpg</img>
 			<dateAjout>2015-10-01</dateAjout>
 			<dimension>3000*2000</dimension>
 			<resolution>300</resolution>
@@ -38,43 +38,8 @@
 				<email>mok@hj.xom</email>
 			</personne>
 		</photo>
-		<photo datePrise="2015-09-01" lieu="Bordeaux" titre="Tour_eiffel.jpg">
-			<img>http://monumentsdeparis.net/content/tour-eiffel.jpg</img>
-			<dateAjout>2014-01-30</dateAjout>
-			<dimension>1500*1000</dimension>
-			<resolution>300</resolution>
-			<categorie>Loisirs</categorie>
-			<commentaire>il faisait beau</commentaire>
-			<note>12</note>
-			<sommeVotes>22</sommeVotes>
-			<nbVotes>21</nbVotes>
-			<personne>
-				<nomP>toto</nomP>
-				<prenomP>titi</prenomP>
-				<email>mok@hj.xom</email>
-			</personne>
-		</photo>
-	</catalogue>
-	
-	<catalogue dateCreation="2015-10-01" theme="CatalogueGabi">
-		<personne>
-			<nomP>toto</nomP>
-			<prenomP>titi</prenomP>
-			<email>mok@hj.xom</email>
-		</personne>
-		
-		
 		
 	</catalogue>
 	
-	<catalogue dateCreation="2015-10-01" theme="CatalogueToto">
-		<personne>
-			<nomP>toto</nomP>
-			<prenomP>titi</prenomP>
-			<email>mok@hj.xom</email>
-		</personne>
-		
-		
-		
-	</catalogue>
+	
 </application>

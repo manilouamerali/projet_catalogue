@@ -9,15 +9,9 @@
     </head>
     <body>
     	<div class="dark-matter">
-	        <form action="Application" method="post" >
-	            <fieldset>
+
+		<form action="UploadPhoto" enctype="multipart/form-data" method="post" >	            <fieldset>
 	                <H1>Ajout de photo</H1>
-	
-	                <label for="description">
-	                	<span>Description du fichier</span>
-	                	<input type="text" id="description" name="description" value="" />
-	                </label>
-	                
 	
 	                <label for="fichier">
 	                	 <span class="requis">Emplacement du fichier</span>
@@ -60,9 +54,9 @@
 
 	                
 	                <label for="prenomAuteur">
-	                <span>Prénom de l'auteur</span>
-	                <input type="text" id="prenomAuteur" name="prenomAuteur" />
-	                
+		                <span>Prénom de l'auteur</span>
+		                <input type="text" id="prenomAuteur" name="prenomAuteur" />
+	                </label>
 	                
 					<label for="resolution">
 						<span>Résolution</span>
@@ -91,3 +85,7 @@
         </div>
     </body>
 </html>
+
+
+
+

@@ -4,7 +4,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -30,7 +32,7 @@ public class Catalogue {
 	private String dateCreation;
 	private String theme;
 	private String dateModif;
-	private List<Photo> photos=new ArrayList<Photo>();
+	private List<Photo> photos=new CopyOnWriteArrayList<Photo>();
 	private Node noeudCatalogue;
 	
 	public Catalogue(){}
@@ -85,27 +87,21 @@ public class Catalogue {
 			final DocumentBuilder builder = factory.newDocumentBuilder();
 			String path = this.getClass().getResource("/").getPath();
 			path = path.replace("/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/projet_catalogue/WEB-INF/classes","");
-			
-			Document document= builder.parse(new File(path+"projet_catalogue/WebContent/Catalogue.xml"));
-			//Document document= builder.parse(new File("C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/"+"Catalogue.xml"));
-			
-			
+			path="C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/";			
+			//Document document= builder.parse(new File(path+"projet_catalogue/WebContent/Catalogue.xml"));
+
+			Document document= builder.parse(new File(path+"Catalogue.xml"));
+
 			Source input = new DOMSource(document);
-			Result output = new StreamResult(new File(path+"projet_catalogue/WebContent/Catalogue.xml"));
+			Result output = new StreamResult(new File(path+"Catalogue2.xml"));
 			Transformer transformer = null;
-			try{
-				transformer = TransformerFactory.newInstance().newTransformer();
-			}
-			catch(TransformerConfigurationException e){
-				System.err.println("Impossible de créer transfo");
-				System.exit(1);
-			}
-			transformer.setOutputProperty(OutputKeys.METHOD,"xml");
-			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
-			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-			Element racine = document.getDocumentElement();
+			transformer = TransformerFactory.newInstance().newTransformer();
 			
+//			transformer.setOutputProperty(OutputKeys.METHOD,"xml");
+//			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
+//			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+//			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+			Element racine = document.getDocumentElement();
 			
 			Node noeud = racine.getFirstChild().getNextSibling();
 			while(noeud != null)
@@ -114,7 +110,6 @@ public class Catalogue {
 					Element eNoeud = (Element) noeud;
 					System.out.println("Parcours des catalogues : "+ eNoeud.getAttribute("theme"));
 					if(eNoeud.getAttribute("theme").equals(this.theme)){
-						
 						Element newP = document.createElement("photo");
 						newP.setAttribute("datePrise", p.getDatePrise());
 						newP.setAttribute("titre", p.getTitre());
@@ -161,12 +156,8 @@ public class Catalogue {
 				}
 				noeud = noeud.getNextSibling();
 			}
-			try{
-				transformer.transform(input, output);
-			} catch(TransformerException e){
-				System.err.println("La Transformation a échoué "+e);
-				System.exit(1);
-			}
+			transformer.transform(input, output);
+		
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 		} catch (SAXException e) {
@@ -176,11 +167,19 @@ public class Catalogue {
 		} catch (TransformerFactoryConfigurationError e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		} catch (TransformerConfigurationException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (TransformerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
+	
 	public Node getNoeudCatalogue() {
 		return noeudCatalogue;
 	}
+
 	public void setNoeudCatalogue(Node noeudCatalogue) {
 		this.noeudCatalogue = noeudCatalogue.cloneNode(true);
 	}

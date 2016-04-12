@@ -2,10 +2,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -25,13 +27,13 @@ import org.w3c.dom.Node;
 import org.xml.sax.SAXException;
 
 public class Gallerie {
-	
+
 	private List<Catalogue> catalogues;
 	private Map < String , List < Photo > > photosAuteur;
 
 	private static Gallerie instance;
 	private Gallerie(){
-		catalogues=new ArrayList<Catalogue>();
+		catalogues=new CopyOnWriteArrayList<Catalogue>();
 		photosAuteur =new HashMap <String , List < Photo > >();
 	}
 	public static Gallerie getInstance(){
@@ -69,56 +71,37 @@ public class Gallerie {
 			builder = factory.newDocumentBuilder();
 			String path = this.getClass().getResource("/").getPath();
 			path = path.replace("WEB-INF/classes","");
+			path = "C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/";
 			document= builder.parse(new File(path+"Catalogue.xml"));
-			//document= builder.parse(new File("C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/"+"Catalogue.xml"));
 			
 			Source input = new DOMSource(document);
-			//Result output = new StreamResult(new File("C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/"+"Catalogue.xml"));
-			Result output = new StreamResult(new File("C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/"+"Catalogue.xml"));
+			Result output = new StreamResult(new File(path+"Catalogue.xml"));
 			final Element racine = document.getDocumentElement();
 			
 			Node catalogue= racine.getFirstChild().getNextSibling(); 
 			while(catalogue != null){
-				//System.out.println(catalogue.getNodeName());		
 				if (catalogue.getNodeType() == Node.ELEMENT_NODE) {//on est dans catalogue
 					Element eCata = (Element) catalogue;
 					if(eCata.getAttribute("theme").equals(themeCatalogue)){
-						//supprimer l'ensemble des photos du catalogue puis supprimer le catalogue
-						Node child = catalogue.getFirstChild().getNextSibling().getNextSibling().getNextSibling();
-						while(child != null){	
-							catalogue.removeChild(child);
-							
-//							if (child.getNodeType() == Node.ELEMENT_NODE) {//on est dans catalogue
-//								Element eElement = (Element) child;
-//								
-//								if(eElement.getAttribute("titre").equals(titrePhoto)){					
-//									eElement.getParentNode().removeChild(eElement);
-//									for(Catalogue c: catalogues)
-//										if(c.getTheme().equals(themeCatalogue)){				
-//											Photo aRetirer;
-//											aRetirer=c.retirerPhoto(titrePhoto);
-//											photosAuteur.get(aRetirer.getAuteur()).remove(aRetirer);
-//											break;
-//										}
-//								}
-//							}
-							if((child = child.getNextSibling()) == null )
-								break;
-							else
-								child = child.getNextSibling();
-					    }
-						racine.removeChild(catalogue);
+						catalogue.getParentNode().removeChild(catalogue);
 						for(Catalogue c: catalogues)
 							if(c.getTheme().equals(themeCatalogue)){				
 								Set<Entry<String, List<Photo>>> setHm = photosAuteur.entrySet();
 								for (Photo p: c.getPhotos()){
+									String pathImg=p.getImg();
+									new File(pathImg).delete();
 									for(Entry<String, List<Photo>> e :setHm){
 										if(e.getKey().equals(p.getAuteur().getPrenomP().concat(p.getAuteur().getNomP())))
 											e.getValue().remove(p);
 									}
 									c.retirerPhoto(p.getTitre());
-									
 								}
+								//suppression du dossier
+								String pathImg = this.getClass().getResource("/").getPath();
+								pathImg = pathImg.replace("classes/","images/");
+								pathImg ="C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/WEB-INF/images/";
+								pathImg+=c.getTheme()+"/";
+								new File(pathImg).delete();
 								instance.getCatalogues().remove(c);
 								break;
 							}
@@ -132,15 +115,13 @@ public class Gallerie {
 			transformer.transform(input, output);
 
 		} catch (TransformerFactoryConfigurationError | ParserConfigurationException | SAXException | IOException | TransformerException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 	}
 
 	public void supprimerPhoto(String themeCatalogue, String titrePhoto){
-		//A vérifier
-		//Corriger le chemin
+
 		final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		Document document;
 		DocumentBuilder builder;
@@ -150,11 +131,11 @@ public class Gallerie {
 			builder = factory.newDocumentBuilder();
 			String path = this.getClass().getResource("/").getPath();
 			path = path.replace("WEB-INF/classes","");
-			document= builder.parse(new File(path+"Catalogue.xml"));
-			//document= builder.parse(new File("C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/"+"Catalogue.xml"));
+			//document= builder.parse(new File(path+"Catalogue.xml"));
+			document= builder.parse(new File("C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/"+"Catalogue.xml"));
 
 			Source input = new DOMSource(document);
-			Result output = new StreamResult(new File(path+"Catalogue.xml"));			
+			Result output = new StreamResult(new File("C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/"+"Catalogue.xml"));			
 			final Element racine = document.getDocumentElement();
 			
 			Node catalogue= racine.getFirstChild().getNextSibling(); 
@@ -171,16 +152,25 @@ public class Gallerie {
 								Element eElement = (Element) child;
 								if(eElement.getAttribute("titre").equals(titrePhoto)){					
 									eElement.getParentNode().removeChild(eElement);
-									System.out.println("je suis la   "+titrePhoto);
+									//System.out.println("je suis la   "+titrePhoto);
 
 									for(Catalogue c: catalogues)
-										if(c.getTheme().equals(themeCatalogue)){			
+										if(c.getTheme().equals(themeCatalogue)){
 											Photo aRetirer;
 											aRetirer=c.retirerPhoto(titrePhoto);
+											//suppression de la photo du dossier
+											
+											String pathImg=aRetirer.getImg();
+											new File(pathImg).delete();
+											
 											Set<Entry<String, List<Photo>>> setHm = photosAuteur.entrySet();
 											for(Entry<String, List<Photo>> e :setHm){
 												if(e.getKey().equals(aRetirer.getAuteur().getPrenomP().concat(aRetirer.getAuteur().getNomP())))
 													e.getValue().remove(aRetirer);
+											}
+											if(c.getPhotos().size()==0){
+												supprimerCatalogue(c.getTheme());
+												racine.removeChild(catalogue);
 											}
 											break;
 										}
@@ -199,6 +189,8 @@ public class Gallerie {
 				else
 					catalogue = catalogue.getNextSibling();
 			}
+			System.out.println(input.getSystemId()+"   "+output.getSystemId());
+
 			transformer.transform(input, output);
 		} catch (ParserConfigurationException | SAXException | IOException | TransformerFactoryConfigurationError | TransformerException e) {
 			// TODO Auto-generated catch block
@@ -216,11 +208,10 @@ public class Gallerie {
 			final DocumentBuilder builder = factory.newDocumentBuilder();
 		
 			String path = this.getClass().getResource("/").getPath();
-			
+			//System.out.println(path);
 			path = path.replace("WEB-INF/classes","");
-			System.out.println("maj gallerie " +path);
-			document = builder.parse(new File(path+"Catalogue.xml"));
-			//document= builder.parse(new File("C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/"+"Catalogue.xml"));
+			//document= builder.parse(new File(path+"Catalogue.xml"));
+			document= builder.parse(new File("C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/"+"Catalogue.xml"));
 			
 			final Element racine = document.getDocumentElement();
 
@@ -248,16 +239,15 @@ public class Gallerie {
 					cat.setAuteur(pAuteur);
 					cat.setTheme(eElement.getAttribute("theme"));
 					cat.setDateCreation(eElement.getAttribute("dateCreation"));
-					//System.out.println("nomAuteur: " + eElement.getAttribute("nomAuteur"));
-					//System.out.println(nbPhotos);
-					
 					for (Node photo= catalogue.getFirstChild().getNextSibling().getNextSibling().getNextSibling(); photo!= null;
 							photo= photo.getNextSibling().getNextSibling()) {
-					        //System.out.println(photo.getNodeName());
 					        
-						//System.out.println("\n"+i+" Current Element :" + racineCatalogue.item(i).getTextContent());
-						//System.out.println("nombre de zebi"+racineCatalogue.item(i).getTextContent());
-
+						String pathImg = this.getClass().getResource("/").getPath();
+						pathImg = pathImg.replace("classes/","images/");
+						pathImg ="C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/WEB-INF/images/";
+						pathImg+=cat.getTheme()+"/";
+						
+						
 						Photo p=new Photo();
 						p.setCat(cat.getTheme());
 						cat.ajouterPhoto(p);
@@ -274,18 +264,16 @@ public class Gallerie {
 							p.setLieu(ePhoto.getAttribute("lieu"));
 							p.setTitre(ePhoto.getAttribute("titre"));
 
-							//System.out.println("\nCurrent Element :" + ePhoto.getNodeName());
-							//System.out.println(ePhoto.getElementsByTagName("resolution").item(0).getTextContent());
-
 							p.setCategorie(ePhoto.getElementsByTagName("categorie").item(0).getTextContent());
-							p.setImg(ePhoto.getElementsByTagName("img").item(0).getTextContent());
+							
+							String titre=ePhoto.getElementsByTagName("img").item(0).getTextContent();
+							p.setImg(pathImg+titre);
 							p.setDateAjout(ePhoto.getElementsByTagName("dateAjout").item(0).getTextContent());
 							p.setDimension(ePhoto.getElementsByTagName("dimension").item(0).getTextContent());
 							p.setResolution(Integer.parseInt(ePhoto.getElementsByTagName("resolution").item(0).getTextContent()));
 							p.setCommentaire(ePhoto.getElementsByTagName("commentaire").item(0).getTextContent());
 							
 							Node auteurPhoto= ePhoto.getElementsByTagName("personne").item(0);
-							//System.out.println("\nCurrent Element :" + ePhoto.getNodeName());
 							
 							if (auteurPhoto.getNodeType() == Node.ELEMENT_NODE) {//on est dans auteur
 								Element eAuteur= (Element) auteurPhoto;
@@ -294,31 +282,19 @@ public class Gallerie {
 								pAuteurPhoto.setNomP(eAuteur.getElementsByTagName("nomP").item(0).getTextContent());
 								pAuteurPhoto.setPrenomP(eAuteur.getElementsByTagName("prenomP").item(0).getTextContent());
 								pAuteurPhoto.setEmail(eAuteur.getElementsByTagName("email").item(0).getTextContent());
-								//System.out.println("\nCurrent Element :" + pAuteurPhoto.getNomP());
-								//System.out.println("\nCurrent Element :" + pAuteurPhoto.getNomP()+pAuteurPhoto.getPrenomP());
 								if(photosAuteur.containsKey(pAuteurPhoto.getPrenomP()+pAuteurPhoto.getNomP())){
 									photosAuteur.get(pAuteurPhoto.getPrenomP()+pAuteurPhoto.getNomP()).add(p);
-									//System.out.println("existe deja:" + pAuteurPhoto.getNomP());
 								}
 								else{
-									List<Photo> l = new ArrayList<Photo>();
+									List<Photo> l = new CopyOnWriteArrayList<Photo>();
 									l.add(p);
 									photosAuteur.put(pAuteurPhoto.getPrenomP()+pAuteurPhoto.getNomP(), l);
-									//System.out.println("n'existe pas:" + pAuteurPhoto.getNomP());
 								}
-								
-//								for(String lPhotos : photosAuteur.keySet()){
-//									System.out.println(lPhotos);
-//								}
-//								for(List<Photo> lPhotos : photosAuteur.values()){
-//									for(Photo pho:lPhotos)//c'est la boucle pour afficher les photos pour chaque auteur
-////										System.out.println(pho.getImg());
-//								}
+					
 							}
 						}
 					}
 				}	
-				//System.out.println("\nCurrent Element :" + photosAuteur.size());
 				
 			}				
 		}
@@ -338,8 +314,7 @@ public class Gallerie {
 
 	public void ajouterPhoto(String theme, Photo nvelleP) {
 		for(Catalogue c: catalogues)
-			if(c.getTheme().equals(theme)){
-				System.out.println("ajouterPhoto Gallerie : "+nvelleP.getImg());
+			if(c.getTheme().equals(theme)){				
 				c.ecrireXML(nvelleP);
 				//photosAuteur.get(nvelleP.getAuteur()).add(nvelleP);
 				break;

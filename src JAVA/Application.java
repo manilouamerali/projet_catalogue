@@ -63,6 +63,15 @@ public class Application extends HttpServlet {
 			case "lancement":
 				VUE="/AffichageGallerie.jsp";
 				break;
+			case "modifierPhoto":
+				gallerie.supprimerPhoto(request.getParameter( "themeCatalogue" ), request.getParameter( "titrePhoto" ));
+				Photo p=new Photo();
+				p.creerPhoto(request.getParameter( "datePrise"), request.getParameter( "lieu"), request.getParameter( " nomAuteur"),request.getParameter( "prenomAuteur"),request.getParameter( "emailAuteur"), 
+						request.getParameter( "titre"), request.getParameter( "dimension"), Integer.parseInt(request.getParameter( "resolution")), request.getParameter( "categorie"),
+						request.getParameter( "commentaire"),request.getParameter("fichier"),request.getParameter("themeCatalogue"));
+				
+				gallerie.ajouterPhoto(request.getParameter( "themeCatalogue" ),p);
+				break;
 			default:
 				break;
 		}

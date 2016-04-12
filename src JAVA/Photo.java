@@ -101,29 +101,28 @@ public final class Photo{
 	public int getNote(){
 		return (int)sommeVotes/nbVotes;
 	}
-	public Photo creerPhoto(String datePrise, String lieu, String nomAuteur,String prenomAuteur, String emailAuteur, 
+	public void creerPhoto(String datePrise, String lieu, String nomAuteur,String prenomAuteur, String emailAuteur, 
 			String titre, String dimension, int resolution, String categorie,
-			String commentaire,String img){
+			String commentaire,String img, String cat){
 		Photo p = new Photo();
-		p.setDatePrise(datePrise);
-		p.setLieu(lieu);
-		p.setAuteur(new Personne(nomAuteur, prenomAuteur, emailAuteur));
+		this.setDatePrise(datePrise);
+		this.setLieu(lieu);
+		this.setAuteur(new Personne(nomAuteur, prenomAuteur, emailAuteur));
 		
-		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date date = new Date();
-		p.setDateAjout(dateFormat.format(date));
+		this.setDateAjout(dateFormat.format(date));
 		
-		p.setDateModif(dateModif);
-		p.setTitre(titre);
-		p.setDimension(dimension);
-		p.setResolution(resolution);
-		p.setCategorie(categorie);
-		p.setCommentaire(commentaire);
-		p.setImg(img);
-		p.setNbVotes(0);
-		p.setSommeVotes(0);
-		
-		return p;
+		this.setDateModif(dateModif);
+		this.setTitre(titre);
+		this.setDimension(dimension);
+		this.setResolution(resolution);
+		this.setCategorie(categorie);
+		this.setCommentaire(commentaire);
+		this.setImg(img);
+		this.setNbVotes(0);
+		this.setSommeVotes(0);
+		this.setCat(cat);
 	}
 	public String getCat() {
 		return cat;

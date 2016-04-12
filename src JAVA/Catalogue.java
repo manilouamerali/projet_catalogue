@@ -9,6 +9,7 @@ import java.util.List;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
@@ -83,22 +84,40 @@ public class Catalogue {
 		try {
 			final DocumentBuilder builder = factory.newDocumentBuilder();
 			String path = this.getClass().getResource("/").getPath();
-			path = path.replace("WEB-INF/classes","");
-			//Document document= builder.parse(new File(path+"Catalogue.xml"));
-			Document document= builder.parse(new File("C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/"+"Catalogue.xml"));
-			Transformer transformer = TransformerFactory.newInstance().newTransformer();
-			Result output = new StreamResult(new File("Catalogue.xml"));
-			Element racine = document.getDocumentElement();
+			path = path.replace("/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/projet_catalogue/WEB-INF/classes","");
+			
+			Document document= builder.parse(new File(path+"projet_catalogue/WebContent/Catalogue.xml"));
+			//Document document= builder.parse(new File("C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/"+"Catalogue.xml"));
+			
+			
 			Source input = new DOMSource(document);
+			Result output = new StreamResult(new File(path+"projet_catalogue/WebContent/Catalogue.xml"));
+			Transformer transformer = null;
+			try{
+				transformer = TransformerFactory.newInstance().newTransformer();
+			}
+			catch(TransformerConfigurationException e){
+				System.err.println("Impossible de créer transfo");
+				System.exit(1);
+			}
+			transformer.setOutputProperty(OutputKeys.METHOD,"xml");
+			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+			Element racine = document.getDocumentElement();
+			
 			
 			Node noeud = racine.getFirstChild().getNextSibling();
 			while(noeud != null)
 			{
 				if (noeud.getNodeType() == Node.ELEMENT_NODE) {//on est dans catalogue
 					Element eNoeud = (Element) noeud;
+					System.out.println("Parcours des catalogues : "+ eNoeud.getAttribute("theme"));
 					if(eNoeud.getAttribute("theme").equals(this.theme)){
-						//System.out.println("Ecrire XML "+noeud.getNodeName());
+						
 						Element newP = document.createElement("photo");
+						newP.setAttribute("datePrise", p.getDatePrise());
+						newP.setAttribute("titre", p.getTitre());
 						Element nInfo = document.createElement("img");
 						nInfo.appendChild(document.createTextNode(p.getImg()));
 						newP.appendChild(nInfo);
@@ -108,10 +127,10 @@ public class Catalogue {
 						nInfo = document.createElement("dimension");
 						nInfo.appendChild(document.createTextNode(p.getDimension()));
 						newP.appendChild(nInfo);
-						/*
+						
 						nInfo = document.createElement("resolution");
-						nInfo.appendChild(document.createTextNode(p.getResolution()));
-						newP.appendChild(nInfo);*/
+						nInfo.appendChild(document.createTextNode(Integer.toString(p.getResolution())));
+						newP.appendChild(nInfo);
 						nInfo = document.createElement("categorie");
 						nInfo.appendChild(document.createTextNode(p.getCategorie()));
 						newP.appendChild(nInfo);
@@ -120,13 +139,13 @@ public class Catalogue {
 						newP.appendChild(nInfo);
 						
 						nInfo = document.createElement("note");
-						//nInfo.appendChild(document.createTextNode(0));
+						nInfo.appendChild(document.createTextNode(Integer.toString(0)));
 						newP.appendChild(nInfo);
 						nInfo = document.createElement("sommeVotes");
-						//nInfo.appendChild(document.createTextNode(0));
+						nInfo.appendChild(document.createTextNode(Integer.toString(0)));
 						newP.appendChild(nInfo);
 						nInfo = document.createElement("nbVotes");
-						//nInfo.appendChild(document.createTextNode(0));
+						nInfo.appendChild(document.createTextNode(Integer.toString(0)));
 						newP.appendChild(nInfo);
 						Element nP = document.createElement("personne");
 						newP.appendChild(nP);
@@ -135,36 +154,33 @@ public class Catalogue {
 						nInfo = document.createElement("prenomP");
 						nP.appendChild(nInfo);
 						nInfo = document.createElement("email");
-						nP.appendChild(nInfo);
-						
-						noeud.appendChild(newP);
+						nP.appendChild(nInfo);		
+						eNoeud.appendChild(newP);
+						System.out.println(newP.getNodeName());
 					}
 				}
+				noeud = noeud.getNextSibling();
 			}
-			transformer.transform(input, output);
-
+			try{
+				transformer.transform(input, output);
+			} catch(TransformerException e){
+				System.err.println("La Transformation a échoué "+e);
+				System.exit(1);
+			}
 		} catch (ParserConfigurationException e) {
 			e.printStackTrace();
 		} catch (SAXException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
-		} catch (TransformerConfigurationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (TransformerFactoryConfigurationError e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (TransformerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
 	public Node getNoeudCatalogue() {
 		return noeudCatalogue;
 	}
-
 	public void setNoeudCatalogue(Node noeudCatalogue) {
 		this.noeudCatalogue = noeudCatalogue.cloneNode(true);
 	}

@@ -69,10 +69,11 @@ public class Gallerie {
 			builder = factory.newDocumentBuilder();
 			String path = this.getClass().getResource("/").getPath();
 			path = path.replace("WEB-INF/classes","");
-			//document= builder.parse(new File(path+"Catalogue.xml"));
-			document= builder.parse(new File("C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/"+"Catalogue.xml"));
+			document= builder.parse(new File(path+"Catalogue.xml"));
+			//document= builder.parse(new File("C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/"+"Catalogue.xml"));
 			
 			Source input = new DOMSource(document);
+			//Result output = new StreamResult(new File("C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/"+"Catalogue.xml"));
 			Result output = new StreamResult(new File("C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/"+"Catalogue.xml"));
 			final Element racine = document.getDocumentElement();
 			
@@ -149,11 +150,11 @@ public class Gallerie {
 			builder = factory.newDocumentBuilder();
 			String path = this.getClass().getResource("/").getPath();
 			path = path.replace("WEB-INF/classes","");
-			//document= builder.parse(new File(path+"Catalogue.xml"));
-			document= builder.parse(new File("C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/"+"Catalogue.xml"));
+			document= builder.parse(new File(path+"Catalogue.xml"));
+			//document= builder.parse(new File("C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/"+"Catalogue.xml"));
 
 			Source input = new DOMSource(document);
-			Result output = new StreamResult(new File("C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/"+"Catalogue.xml"));			
+			Result output = new StreamResult(new File(path+"Catalogue.xml"));			
 			final Element racine = document.getDocumentElement();
 			
 			Node catalogue= racine.getFirstChild().getNextSibling(); 
@@ -215,9 +216,11 @@ public class Gallerie {
 			final DocumentBuilder builder = factory.newDocumentBuilder();
 		
 			String path = this.getClass().getResource("/").getPath();
-			System.out.println(path);
+			
 			path = path.replace("WEB-INF/classes","");
-			document= builder.parse(new File("C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/"+"Catalogue.xml"));
+			System.out.println("maj gallerie " +path);
+			document = builder.parse(new File(path+"Catalogue.xml"));
+			//document= builder.parse(new File("C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/"+"Catalogue.xml"));
 			
 			final Element racine = document.getDocumentElement();
 
@@ -335,9 +338,10 @@ public class Gallerie {
 
 	public void ajouterPhoto(String theme, Photo nvelleP) {
 		for(Catalogue c: catalogues)
-			if(c.getTheme().equals(theme)){				
+			if(c.getTheme().equals(theme)){
+				System.out.println("ajouterPhoto Gallerie : "+nvelleP.getImg());
 				c.ecrireXML(nvelleP);
-				photosAuteur.get(nvelleP.getAuteur()).add(nvelleP);
+				//photosAuteur.get(nvelleP.getAuteur()).add(nvelleP);
 				break;
 			}
 	}

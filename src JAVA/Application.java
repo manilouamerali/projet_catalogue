@@ -53,21 +53,20 @@ public class Application extends HttpServlet {
 				request.setAttribute( "theme",request.getParameter( "themeCatalogue" ));
 			case "nouvellePhoto":
 				Photo nvelleP=new Photo();
+				System.out.println("Avant creerPhoto Application : "+request.getParameter( "commentaire"));
 				nvelleP.creerPhoto(request.getParameter( "datePrise"), request.getParameter( "lieu"), request.getParameter( " nomAuteur"),request.getParameter( "prenomAuteur"),request.getParameter( "emailAuteur"), 
 						request.getParameter( "titre"), request.getParameter( "dimension"), Integer.parseInt(request.getParameter( "resolution")), request.getParameter( "categorie"),
-						request.getParameter( "commentaire"),request.getParameter( "img"));
-				
+						request.getParameter( "commentaire"),request.getParameter("fichier"),request.getParameter("themeCatalogue"));
+				System.out.println("Application nouvellePhoto : "+ nvelleP.getImg());
 				gallerie.ajouterPhoto(request.getParameter( "themeCatalogue" ),nvelleP);
 				break;
 			case "lancement":
-				gallerie.majGallerie();
 				VUE="/AffichageGallerie.jsp";
 				break;
 			default:
 				break;
 		}
 		request.setAttribute( "gallerie", gallerie);
-		
 		this.getServletContext().getRequestDispatcher( VUE ).forward( request, response );
 	}	
 	

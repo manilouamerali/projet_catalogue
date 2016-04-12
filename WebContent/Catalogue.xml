@@ -1,4 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="CatalogueSchema.xsd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="CatalogueSchema.xsd">
 	<catalogue dateCreation="2015-10-01" theme="CatalogueManil">
 		<personne>
 			<nomP>toto</nomP>
@@ -39,7 +40,16 @@
 			</personne>
 		</photo>
 		
-	</catalogue>
+	<photo titre="logo.jpg">
+<img>logo.jpg</img>
+</photo>
+<photo titre="logo.jpg">
+<img>logo.jpg</img>
+</photo>
+<photo titre="logo.jpg">
+<img>logo.jpg</img>
+</photo>
+</catalogue>
 	
 	
 </application>

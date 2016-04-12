@@ -12,8 +12,8 @@
 
 		<form action="UploadPhoto" enctype="multipart/form-data" method="post" >	            <fieldset>
 	                <H1>Ajout de photo</H1>
-			<input type="hidden" name="themeCatalogue" value="${theme}"/>
-
+					<input type="hidden" name="themeCatalogue" value="${theme}"/>
+	
 	                <label for="fichier">
 	                	 <span class="requis">Emplacement du fichier</span>
 	                	  <input type="file" id="fichier" name="fichier" />
@@ -68,16 +68,12 @@
 						<span>Catégorie</span>
 	               		 <input type="text" id="categorie" name="categorie" />
 	                </label>
-
 				
 					<label for="commentaire">
 						<span>Commentaire</span>
 	              		  <input type="text" id="commentaire" name="commentaire" />
 	               	</label>
 
-				
-					<input type="hidden" name="action" value="nouvellePhoto"/>
-	<!-- 				ne pas oublier de transferer le theme du catalogue -->
 	                <input type="submit" value="Ajouter" class="button" />
 	                <br />                
 	            </fieldset>
@@ -85,7 +81,3 @@
         </div>
     </body>
 </html>
-
-
-
-

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<application xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="CatalogueSchema.xsd">
+	<catalogue dateCreation="2015-10-01" theme="CatalogueManil">
+		<personne>
+			<nomP>toto</nomP>
+			<prenomP>titi</prenomP>
+			<email>mok@hj.xom</email>
+		</personne>
+		
+		<photo datePrise="2015-10-01" lieu="Bordeaux" titre="Tour_Eiffel.jpg">
+			<img>Tour_Eiffel.jpg</img>
+			<dateAjout>2015-10-01</dateAjout>
+			<dimension>3000*2000</dimension>
+			<resolution>300</resolution>
+			<categorie>Loisirs</categorie>
+			<commentaire>il faisait beau</commentaire>
+			<note>12</note>
+			<sommeVotes>22</sommeVotes>
+			<nbVotes>21</nbVotes>
+			<personne>
+				<nomP>tata</nomP>
+				<prenomP>tutu</prenomP>
+				<email>mok@hj.xom</email>
+			</personne>
+		</photo>
+		<photo datePrise="2015-10-01" lieu="Bordeaux" titre="statuedelaliberte.jpg">
+			<img>statuedelaliberte.jpg</img>
+			<dateAjout>2015-10-01</dateAjout>
+			<dimension>3000*2000</dimension>
+			<resolution>300</resolution>
+			<categorie>Loisirs</categorie>
+			<commentaire>il faisait beau</commentaire>
+			<note>12</note>
+			<sommeVotes>22</sommeVotes>
+			<nbVotes>21</nbVotes>
+			<personne>
+				<nomP>tata</nomP>
+				<prenomP>tutu</prenomP>
+				<email>mok@hj.xom</email>
+			</personne>
+		</photo>
+		
+	<photo titre="logo.jpg">
+<img>logo.jpg</img>
+</photo>
+<photo titre="logo.jpg">
+<img>logo.jpg</img>
+</photo>
+<photo titre="logo.jpg">
+<img>logo.jpg</img>
+</photo>
+</catalogue>
+	
+	
+</application>

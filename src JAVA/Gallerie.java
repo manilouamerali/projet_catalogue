@@ -317,4 +317,8 @@ public class Gallerie {
 				break;
 			}
 	}
+	public void ajouterCatalogue(String parameter, String parameter2, String parameter3) {
+		// TODO Auto-generated method stub
+		
+	}
 }

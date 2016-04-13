@@ -48,6 +48,8 @@ public class Application extends HttpServlet {
 			case "supprimerPhoto":
 				gallerie.supprimerPhoto(request.getParameter( "themeCatalogue" ), request.getParameter( "titrePhoto" ));
 				break;
+			case "nouveauCatalogue":
+				gallerie.ajouterCatalogue(request.getParameter( "theme" ),request.getParameter( "nom" ),request.getParameter( "prenom" ))
 			case "ajoutPhoto":
 				VUE="/AjoutPhoto.jsp";
 				request.setAttribute( "theme",request.getParameter( "themeCatalogue" ));

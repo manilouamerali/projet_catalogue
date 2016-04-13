@@ -12,11 +12,9 @@
 
 		<form action="Application" method="post" >	      
 	                <H1>Ajout de catalogue</H1>
-					
-	
-	                               
+   
 	                <label for="theme">
-	                	<span>thème</span>
+	                	<span>Thème</span>
 	                	<input type="text" id="theme" name="theme" />
 	                </label>
 	                

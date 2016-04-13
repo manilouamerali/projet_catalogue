@@ -12,9 +12,11 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.TransformerFactoryConfigurationError;
@@ -317,8 +319,65 @@ public class Gallerie {
 				break;
 			}
 	}
-	public void ajouterCatalogue(String parameter, String parameter2, String parameter3) {
-		// TODO Auto-generated method stub
-		
+	public void ajouterCatalogue(Catalogue c) {
+		this.getCatalogues().add(c);
+		ecrireCatalogueXML(c);
+	}
+	private void ecrireCatalogueXML(Catalogue c) {
+		Document document;
+		try{
+			final DocumentBuilderFactory factory  = DocumentBuilderFactory.newInstance();
+			final DocumentBuilder builder = factory.newDocumentBuilder();
+			String path = this.getClass().getResource("/").getPath();
+			path=path.substring(0, path.lastIndexOf("/.metadata"));
+			document= builder.parse(new File(path+"/projet_catalogue/WebContent/Catalogue.xml"));
+
+			Source input = new DOMSource(document);
+			Result output = new StreamResult(new File(path+"/projet_catalogue/WebContent/Catalogue.xml"));
+			Transformer transformer = TransformerFactory.newInstance().newTransformer();
+			
+			transformer.setOutputProperty(OutputKeys.METHOD,"xml");
+//			transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "no");
+//		    transformer.setOutputProperty(OutputKeys.STANDALONE, "no");			
+//		    transformer.setOutputProperty(OutputKeys.VERSION, "1.0");
+			transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+//			transformer.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+			Element racine = document.getDocumentElement();
+			Element eNoeud = (Element) racine;
+			Element newC = document.createElement("catalogue");
+			newC.setAttribute("dateCreation", c.getDateCreation());
+			newC.setAttribute("theme", c.getTheme());
+			
+			Element np = document.createElement("personne");
+			Element nInfo = document.createElement("nom");
+			nInfo.appendChild(document.createTextNode(c.getAuteur().getNomP()));
+			np.appendChild(nInfo);
+			nInfo=document.createElement("prenom");
+			nInfo.appendChild(document.createTextNode(c.getAuteur().getPrenomP()));
+			np.appendChild(nInfo);
+			nInfo = document.createElement("email");
+			nInfo.appendChild(document.createTextNode("ducon@lol.fr"));
+			np.appendChild(nInfo);
+			newC.appendChild(np);
+			
+			eNoeud.appendChild(newC);
+			transformer.transform(input, output);
+		}
+		catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (TransformerFactoryConfigurationError e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (TransformerConfigurationException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		} catch (TransformerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

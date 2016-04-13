@@ -49,13 +49,15 @@ public class Application extends HttpServlet {
 				gallerie.supprimerPhoto(request.getParameter( "themeCatalogue" ), request.getParameter( "titrePhoto" ));
 				break;
 			case "nouveauCatalogue":
-				gallerie.ajouterCatalogue(request.getParameter( "theme" ),request.getParameter( "nom" ),request.getParameter( "prenom" ))
+				Catalogue c = new Catalogue();
+				c.creerCatalogue(request.getParameter( "theme" ),request.getParameter( "nom" ),request.getParameter( "prenom" ));
+				gallerie.ajouterCatalogue(c);
+				break;
 			case "ajoutPhoto":
 				VUE="/AjoutPhoto.jsp";
-				request.setAttribute( "theme",request.getParameter( "themeCatalogue" ));
+				request.setAttribute( "theme" ,request.getParameter( "themeCatalogue" ));
 			case "nouvellePhoto":
 				Photo nvelleP=new Photo();
-				System.out.println("Avant creerPhoto Application : "+request.getParameter( "commentaire"));
 				nvelleP.creerPhoto(request.getParameter( "datePrise"), request.getParameter( "lieu"), request.getParameter( " nomAuteur"),request.getParameter( "prenomAuteur"),request.getParameter( "emailAuteur"), 
 						request.getParameter( "titre"), request.getParameter( "dimension"), Integer.parseInt(request.getParameter( "resolution")), request.getParameter( "categorie"),
 						request.getParameter( "commentaire"),request.getParameter("fichier"),request.getParameter("themeCatalogue"));

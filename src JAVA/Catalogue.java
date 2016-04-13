@@ -80,6 +80,18 @@ public class Catalogue {
 	public void setAuteur(Personne auteur) {
 		this.auteur = auteur;
 	}
+	
+	public void creerCatalogue(String theme, String nom, String prenom){
+		Personne p = new Personne();
+		p.setNomP(nom);
+		p.setPrenomP(prenom);
+		this.setAuteur(p);
+		this.setTheme(theme);
+		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = new Date();
+		this.setDateCreation(dateFormat.format(date));
+	}
 
 	public void ecrireXML(Photo p){
 		Document document;
@@ -107,7 +119,7 @@ public class Catalogue {
 			{
 				if (noeud.getNodeType() == Node.ELEMENT_NODE) {//on est dans catalogue
 					Element eNoeud = (Element) noeud;
-					System.out.println("Parcours des catalogues : "+ eNoeud.getAttribute("theme"));
+//					System.out.println("Parcours des catalogues : "+ eNoeud.getAttribute("theme"));
 					if(eNoeud.getAttribute("theme").equals(this.theme)){
 						Element newP = document.createElement("photo");
 //						newP.setAttribute("datePrise", p.getDatePrise());

@@ -36,18 +36,12 @@ public class Personne {
 	public void setNomP(String nomP) {
 		this.nomP = nomP;
 	}
-
-
 	public String getPrenomP() {
 		return prenomP;
 	}
-
-
 	public void setPrenomP(String prenomP) {
 		this.prenomP = prenomP;
 	}
-
-
 	public String getEmail() {
 		return email;
 	}

@@ -15,9 +15,8 @@
 				
 				<!-- 	Bouton pour ajouter une nouvelle photo -->
 				<div align="center">
-					<form action="AjouterAlbum" method="post">
+					<form action="AjouterCatalogue" method="post">
 						<input class="bouton" type="submit" name="ajouterAlbum" value="Ajouter un Album"/>
-						<input type="hidden" name="themeCatalogue" value="${catalogue.theme}"/>
 					</form>
 				</div>
 	

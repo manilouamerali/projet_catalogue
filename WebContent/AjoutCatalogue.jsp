@@ -10,14 +10,23 @@
     <body>
     	<div class="dark-matter">
 
-		<form action="UploadPhoto" enctype="multipart/form-data" method="post" >	      
+		<form action="AjoutCatalogue" method="post" >	      
 	                <H1>Ajout de catalogue</H1>
-					<input type="hidden" name="themeCatalogue" value="${theme}"/>
+					
 	
 	                               
-	                <label for="teme">
+	                <label for="theme">
 	                	<span>thème</span>
 	                	<input type="text" id="theme" name="theme" />
+	                </label>
+	                
+	                <label for="nom">
+	                	<span>Nom créateur</span>
+	                	<input type="text" id="nom" name="nom" />
+	                </label>
+	                <label for="prenom">
+	                	<span>Prénom créateur</span>
+	                	<input type="text" id="prenom" name="prenom" />
 	                </label>
 	                
 	                <input type="submit" value="Ajouter" class="button" />

@@ -52,6 +52,13 @@
 	
 	<div class="info">
 		<div class="boutons">
+			<form action="ModifierPhoto" method="post">
+				<input type="submit" name="modifierPhoto" class="bouton" value="Modifier la photo"/>
+				<input type="hidden" name="themeCatalogue" value="${catalogue}"/>
+			   	<input type="hidden" name="titrePhoto" value="${photo.titre}"/>			
+			</form>
+		</div>
+		<div class="boutons">
 			<form action="Application" method="post">
 				<input type="submit" name="supprimerPhoto" class="bouton" value="Supprimer la photo"/>
 				<input type="hidden" name="themeCatalogue" value="${catalogue}"/>

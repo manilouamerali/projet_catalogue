@@ -39,5 +39,15 @@
 				<email>mok@hj.xom</email>
 			</personne>
 		</photo>
+
+<photo titre="logo.jpg">
+<img>logo.jpg</img>
+</photo>
+<photo titre="logo.jpg">
+<img>logo.jpg</img>
+</photo>
+<photo titre="logo.jpg">
+<img>logo.jpg</img>
+</photo>
 </catalogue>
 </application>

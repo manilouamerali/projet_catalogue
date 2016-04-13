@@ -66,13 +66,10 @@ public class Gallerie {
 		DocumentBuilder builder;
 		try {
 			Transformer transformer = TransformerFactory.newInstance().newTransformer();
-			
-			
 			builder = factory.newDocumentBuilder();
 			String path = this.getClass().getResource("/").getPath();
-			path = path.replace("WEB-INF/classes","");
-			path = "C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/";
-			document= builder.parse(new File(path+"Catalogue.xml"));
+			path=path.substring(0, path.lastIndexOf("/.metadata"));
+			document= builder.parse(new File(path+"/projet_catalogue/WebContent/Catalogue.xml"));
 			
 			Source input = new DOMSource(document);
 			Result output = new StreamResult(new File(path+"Catalogue.xml"));
@@ -98,8 +95,8 @@ public class Gallerie {
 								}
 								//suppression du dossier
 								String pathImg = this.getClass().getResource("/").getPath();
-								pathImg = pathImg.replace("classes/","images/");
-								pathImg ="C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/WEB-INF/images/";
+								pathImg=pathImg.substring(0, pathImg.lastIndexOf("/.metadata"));
+								pathImg +="/projet_catalogue/WebContent/WEB-INF/images/";
 								pathImg+=c.getTheme()+"/";
 								new File(pathImg).delete();
 								instance.getCatalogues().remove(c);
@@ -129,13 +126,15 @@ public class Gallerie {
 			
 			Transformer transformer = TransformerFactory.newInstance().newTransformer();
 			builder = factory.newDocumentBuilder();
+			
 			String path = this.getClass().getResource("/").getPath();
-			path = path.replace("WEB-INF/classes","");
+			path=path.substring(0, path.lastIndexOf("/.metadata"));
+			document= builder.parse(new File(path+"/projet_catalogue/WebContent/Catalogue.xml"));
 			//document= builder.parse(new File(path+"Catalogue.xml"));
-			document= builder.parse(new File("C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/"+"Catalogue.xml"));
+//			document= builder.parse(new File("C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/"+"Catalogue.xml"));
 
 			Source input = new DOMSource(document);
-			Result output = new StreamResult(new File("C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/"+"Catalogue.xml"));			
+			Result output = new StreamResult(new File("path"+"/projet_catalogue/WebContent/Catalogue.xml"));			
 			final Element racine = document.getDocumentElement();
 			
 			Node catalogue= racine.getFirstChild().getNextSibling(); 
@@ -201,17 +200,15 @@ public class Gallerie {
 	
 
 	public void majGallerie(){
-		
 		final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		Document document = null;
 		try {
 			final DocumentBuilder builder = factory.newDocumentBuilder();
-		
 			String path = this.getClass().getResource("/").getPath();
-			//System.out.println(path);
-			path = path.replace("WEB-INF/classes","");
-			//document= builder.parse(new File(path+"Catalogue.xml"));
-			document= builder.parse(new File("C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/"+"Catalogue.xml"));
+			path=path.substring(0, path.lastIndexOf("/.metadata"));
+			System.out.println(path);
+			document= builder.parse(new File(path+"/projet_catalogue/WebContent/Catalogue.xml"));
+			//document= builder.parse(new File("C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/"+"Catalogue.xml"));
 			
 			final Element racine = document.getDocumentElement();
 
@@ -243,9 +240,11 @@ public class Gallerie {
 							photo= photo.getNextSibling().getNextSibling()) {
 					        
 						String pathImg = this.getClass().getResource("/").getPath();
-						pathImg = pathImg.replace("classes/","images/");
-						pathImg ="C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/WEB-INF/images/";
+						pathImg=pathImg.substring(0, pathImg.lastIndexOf("/.metadata"));
+						pathImg+="/projet_catalogue/WebContent/WEB-INF/images/";
+//						pathImg ="C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/WEB-INF/images/";
 						pathImg+=cat.getTheme()+"/";
+						System.out.println(pathImg);
 						
 						
 						Photo p=new Photo();
@@ -290,12 +289,10 @@ public class Gallerie {
 									l.add(p);
 									photosAuteur.put(pAuteurPhoto.getPrenomP()+pAuteurPhoto.getNomP(), l);
 								}
-					
 							}
 						}
 					}
-				}	
-				
+				}
 			}				
 		}
 		catch (final ParserConfigurationException e) {
@@ -311,7 +308,6 @@ public class Gallerie {
 			e.printStackTrace();
 		}
 	}
-
 	public void ajouterPhoto(String theme, Photo nvelleP) {
 		for(Catalogue c: catalogues)
 			if(c.getTheme().equals(theme)){				

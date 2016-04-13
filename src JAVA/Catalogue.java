@@ -82,18 +82,16 @@ public class Catalogue {
 	}
 
 	public void ecrireXML(Photo p){
+		Document document;
 		try {
 			final DocumentBuilderFactory factory  = DocumentBuilderFactory.newInstance();
 			final DocumentBuilder builder = factory.newDocumentBuilder();
 			String path = this.getClass().getResource("/").getPath();
-			path = path.replace("/.metadata/.plugins/org.eclipse.wst.server.core/tmp1/wtpwebapps/projet_catalogue/WEB-INF/classes","");
-			path="C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/";			
-			//Document document= builder.parse(new File(path+"projet_catalogue/WebContent/Catalogue.xml"));
-
-			Document document= builder.parse(new File(path+"Catalogue.xml"));
+			path=path.substring(0, path.lastIndexOf("/.metadata"));
+			document= builder.parse(new File(path+"/projet_catalogue/WebContent/Catalogue.xml"));
 
 			Source input = new DOMSource(document);
-			Result output = new StreamResult(new File(path+"Catalogue.xml"));
+			Result output = new StreamResult(new File(path+"/projet_catalogue/WebContent/Catalogue.xml"));
 			Transformer transformer = TransformerFactory.newInstance().newTransformer();
 			
 			transformer.setOutputProperty(OutputKeys.METHOD,"xml");

@@ -54,6 +54,7 @@ border:1px solid black;
 display:inline;
 float: left;
 width:340px;
+height: 328px;
 background: #555;
 text-align:center;
 border-radius:7px;
@@ -82,9 +83,9 @@ border-radius: 4px;
 }
 
  .bouton:hover {
-    background: #555;
-   color : #F2F201;
-   cursor:pointer;
+ color: #333;
+    background-color: #EBEBEB;
+    cursor:pointer;
 }
 
 .galerie p {
@@ -268,15 +269,38 @@ text-align:left;
 	
 }
 
-.megabouton {
-	 position:absolute;
-   top: 30%;
-    left: 40%;
+.dark {
 
+	 float: center;
+	 text-align: center;
+    background: #555;
+    padding: 20px 30px 20px 30px;
+    font: 12px "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #D3D3D3;
+    text-shadow: 1px 1px 1px #444;
+    border: none;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
 }
-.dark-matter .grosbouton {
+
+
+.megabouton {
+	position :absolute;
+	    position: absolute;
+    left: 44%;
+    top: 35%;
+display: block;
+   margin : auto;
+   width: 150px;
+   height:150px;
+   
+}
+.dark .grosbouton {
 	width:150px;
 	height:150px;
+	margin-left :auto;
+	margin-right:50%;
 	background: #FFCC02;
     color: #585858;
     text-shadow: 1px 1px 1px #FFE477;
@@ -284,13 +308,15 @@ text-align:left;
     box-shadow: 1px 1px 1px #3D3D3D;
     -webkit-box-shadow:1px 1px 1px #3D3D3D;
     -moz-box-shadow:1px 1px 1px #3D3D3D;
+    border: none;
+    border-radius: 50%;
 	
 }
 
 .grosbouton:hover {
-    background: #555;
-   color :  #FFCC02;
-   cursor:pointer;
+    color: #333;
+    background-color: #EBEBEB;
+    cursor:pointer;
 }
 
 .affichage {
@@ -310,9 +336,17 @@ text-align:left;
 	
 	
 }
-.affichage img {
+.imagegalerie {
 	border-radius: 6px;
+	 width :300px; 
+	 height : 250px;
 	
+}
+
+.imagecatalogue{
+	border-radius: 6px;
+	 width: 200px;
+	  height :150px;
 }
 
 .info {

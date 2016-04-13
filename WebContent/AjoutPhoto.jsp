@@ -10,7 +10,7 @@
     <body>
     	<div class="dark-matter">
 
-		<form action="UploadPhoto" enctype="multipart/form-data" method="post" >	            <fieldset>
+		<form action="UploadPhoto" enctype="multipart/form-data" method="post" >	      
 	                <H1>Ajout de photo</H1>
 					<input type="hidden" name="themeCatalogue" value="${theme}"/>
 	
@@ -19,6 +19,11 @@
 	                	  <input type="file" id="fichier" name="fichier" />
 	                </label>
 	               
+	                               
+	                <label for="titre">
+	                	<span>Titre</span>
+	                	<input type="text" id="titre" name="titre" />
+	                </label>
 	                
 					<label for="datePrise">
 						<span>Date de prise</span>
@@ -31,43 +36,23 @@
 						<input type="text" id="lieu" name="lieu" />
 					</label>
 	                
-	                
-	                <label for="titre">
-	                	<span>Titre</span>
-	                	<input type="text" id="titre" name="titre" />
-	                </label>
 					
 					<label for="dimension">
 						<span>Dimension</span>
 	                	<input type="text" id="dimension" name="dimension" />
 	                </label>
+
 	                
 	                <label for="nomAuteur">
 	               		<span>Nom de l'auteur</span>
 	                	<input type="text" id="nomAuteur" name="nomAuteur" />
 	                </label>
-
-	                
-	                <label for="emailAuteur">
-	                	<span>Email de l'auteur</span>
-	                	<input type="text" id="emailAuteur" name="emailAuteur" />
-	                </label>
-
 	                
 	                <label for="prenomAuteur">
 		                <span>Prénom de l'auteur</span>
 		                <input type="text" id="prenomAuteur" name="prenomAuteur" />
 	                </label>
-	                
-					<label for="resolution">
-						<span>Résolution</span>
-	                	<input type="text" id="resolution" name="resolution" />
-	                </label>
 
-					<label for="categorie">
-						<span>Catégorie</span>
-	               		 <input type="text" id="categorie" name="categorie" />
-	                </label>
 				
 					<label for="commentaire">
 						<span>Commentaire</span>

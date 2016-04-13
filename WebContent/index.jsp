@@ -5,11 +5,11 @@
         <title>INSTAMIAGE</title>
          <link rel="stylesheet" type="text/css" href="Style.css"/>
     </head>
-    <body class="dark-matter">
-        <div class="megabouton">
+    <body class="dark">
+        <div  class="megabouton">
             <form method="post" action="Application">
             <input type="hidden" name="action" value="lancement"/>
-            <input type="submit" class="grosbouton" name="nom" value="Lancer l'application" >
+            <input align="center" type="submit" class="grosbouton" name="nom" value="Lancer l'application" >
             </form>
        </div>
     </body>

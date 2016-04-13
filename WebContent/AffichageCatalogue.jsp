@@ -16,7 +16,7 @@
 			<c:forEach items="${catalogue.photos}" var="photo">
 			<div class="photo">
 				<form action="AffichagePhoto" method="post">
-					<img src="${photo.img}" width="200" height="150"/>
+					<img class="imagecatalogue" src="${photo.img}"/>
 	   				<input type="submit" class="petitbouton" name="titrePhoto" value="${photo.titre}">
 					<input type="hidden" name="themeCatalogue" value="${catalogue.theme}"/>
 				</form>

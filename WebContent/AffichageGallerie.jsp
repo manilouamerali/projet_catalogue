@@ -11,7 +11,16 @@
         <link rel="stylesheet" type="text/css" href="Style.css"/>
     </head>
     <body>
-	<h1 align="center">catalogues : </h1>
+	<h1 align="center">catalogues : </h1>	
+				
+				<!-- 	Bouton pour ajouter une nouvelle photo -->
+				<div align="center">
+					<form action="AjouterAlbum" method="post">
+						<input class="bouton" type="submit" name="ajouterAlbum" value="Ajouter un Album"/>
+						<input type="hidden" name="themeCatalogue" value="${catalogue.theme}"/>
+					</form>
+				</div>
+	
 	<div class="galerie">	
         
 	    <c:forEach items="${gallerie.catalogues}" var="catalogue">
@@ -19,14 +28,14 @@
 	 	
 		    <form action="AffichageCatalogue" method="post">
 				<c:if test="${not empty catalogue.photos}">
-					<img src="${catalogue.photos.get(0).img}" width="300" height="250"/>	  
+					<img class="imagegalerie" src="${catalogue.photos.get(0).img}"/>	  
 				</c:if> 			
 				<p/>
 				<input type="submit" class="bouton" name="themeCatalogue" value="${catalogue.theme}">
 			</form>
 		</div>
 		</c:forEach>
-		
+	
 	</div>	
 
 <!--    bouton ajouter un catalogue	 -->

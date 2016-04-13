@@ -48,6 +48,7 @@ public class UploadPhoto extends HttpServlet {
 			items = upload.parseRequest(request);
 			Photo nvelleP=new Photo();
 			//vérifier si la personne n'existe pas déjà
+			//probleme auteur
 			Personne nvellePers=new Personne();
 			// Process the uploaded items
 			Iterator iter = items.iterator();
@@ -71,7 +72,7 @@ public class UploadPhoto extends HttpServlet {
 				} else {
 
 					String path = this.getClass().getResource("/").getPath();
-					path=path.substring(0, path.lastIndexOf("/.metadata"));
+					path=path.substring(1, path.lastIndexOf("/.metadata"));
 					path +="/projet_catalogue/WebContent/WEB-INF/images/";
 					File fullFile = new File(item.getName());
 					path=path+theme+"/";

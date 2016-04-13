@@ -56,24 +56,19 @@ public class Application extends HttpServlet {
 			case "ajoutPhoto":
 				VUE="/AjoutPhoto.jsp";
 				request.setAttribute( "theme" ,request.getParameter( "themeCatalogue" ));
-			case "nouvellePhoto":
-				Photo nvelleP=new Photo();
-				nvelleP.creerPhoto(request.getParameter( "datePrise"), request.getParameter( "lieu"), request.getParameter( " nomAuteur"),request.getParameter( "prenomAuteur"),request.getParameter( "emailAuteur"), 
-						request.getParameter( "titre"), request.getParameter( "dimension"), Integer.parseInt(request.getParameter( "resolution")), request.getParameter( "categorie"),
-						request.getParameter( "commentaire"),request.getParameter("fichier"),request.getParameter("themeCatalogue"));
-				System.out.println("Application nouvellePhoto : "+ nvelleP.getImg());
-				gallerie.ajouterPhoto(request.getParameter( "themeCatalogue" ),nvelleP);
-				break;
 			case "lancement":
 				VUE="/AffichageGallerie.jsp";
 				break;
 			case "modifierPhoto":
 				gallerie.supprimerPhoto(request.getParameter( "themeCatalogue" ), request.getParameter( "titrePhoto" ));
 				Photo p=new Photo();
-				p.creerPhoto(request.getParameter( "datePrise"), request.getParameter( "lieu"), request.getParameter( " nomAuteur"),request.getParameter( "prenomAuteur"),request.getParameter( "emailAuteur"), 
-						request.getParameter( "titre"), request.getParameter( "dimension"), Integer.parseInt(request.getParameter( "resolution")), request.getParameter( "categorie"),
-						request.getParameter( "commentaire"),request.getParameter("fichier"),request.getParameter("themeCatalogue"));
-				
+				p.setCat(request.getParameter( "themeCatalogue" ));
+				p.setDatePrise(request.getParameter( "datePrise"));
+				p.setLieu(request.getParameter( "lieu"));
+				p.getAuteur().setNomP(request.getParameter( "nomAuteur"));
+				p.getAuteur().setPrenomP(request.getParameter( "prenomAuteur"));
+				p.setCommentaire(request.getParameter( "commentaire"));
+				 
 				gallerie.ajouterPhoto(request.getParameter( "themeCatalogue" ),p);
 				break;
 			default:

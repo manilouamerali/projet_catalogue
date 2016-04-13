@@ -169,10 +169,7 @@ public class Gallerie {
 												if(e.getKey().equals(aRetirer.getAuteur().getPrenomP().concat(aRetirer.getAuteur().getNomP())))
 													e.getValue().remove(aRetirer);
 											}
-											if(c.getPhotos().size()==0){
-												supprimerCatalogue(c.getTheme());
-												racine.removeChild(catalogue);
-											}
+											
 											break;
 										}
 								}
@@ -207,8 +204,8 @@ public class Gallerie {
 		try {
 			final DocumentBuilder builder = factory.newDocumentBuilder();
 			String path = this.getClass().getResource("/").getPath();
-			path=path.substring(0, path.lastIndexOf("/.metadata"));
-			System.out.println(path);
+			path=path.substring(1, path.lastIndexOf("/.metadata"));
+			
 			document= builder.parse(new File(path+"/projet_catalogue/WebContent/Catalogue.xml"));
 			//document= builder.parse(new File("C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/"+"Catalogue.xml"));
 			
@@ -242,11 +239,9 @@ public class Gallerie {
 							photo= photo.getNextSibling().getNextSibling()) {
 					        
 						String pathImg = this.getClass().getResource("/").getPath();
-						pathImg=pathImg.substring(0, pathImg.lastIndexOf("/.metadata"));
+						pathImg=pathImg.substring(1, pathImg.lastIndexOf("/.metadata"));
 						pathImg+="/projet_catalogue/WebContent/WEB-INF/images/";
-//						pathImg ="C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/WEB-INF/images/";
 						pathImg+=cat.getTheme()+"/";
-						System.out.println(pathImg);
 						
 						
 						Photo p=new Photo();

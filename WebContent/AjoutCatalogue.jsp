@@ -10,7 +10,7 @@
     <body>
     	<div class="dark-matter">
 
-		<form action="AjoutCatalogue" method="post" >	      
+		<form action="Application" method="post" >	      
 	                <H1>Ajout de catalogue</H1>
 					
 	
@@ -28,7 +28,7 @@
 	                	<span>Prénom créateur</span>
 	                	<input type="text" id="prenom" name="prenom" />
 	                </label>
-	                
+	                <input type="hidden" value="nouveauCatalogue" name="action" />
 	                <input type="submit" value="Ajouter" class="button" />
 	                <br />                
 	            </fieldset>

@@ -1,17 +1,12 @@
 public class Personne {
-	private static int cmp=1;
 	private int idP;
 	private String nomP;
 	private String prenomP;
-	private String email;
 	public Personne(){
-		idP = cmp++;
 	}
-	public Personne(String _nomP,String _prenomP,String _email){
-		idP = cmp++;
+	public Personne(String _nomP,String _prenomP){
 		nomP=_nomP;
 		prenomP=_prenomP;
-		email=_email;
 	}
 
 	public int getIdP() {
@@ -42,12 +37,5 @@ public class Personne {
 	public void setPrenomP(String prenomP) {
 		this.prenomP = prenomP;
 	}
-	public String getEmail() {
-		return email;
-	}
-
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
+	
 }

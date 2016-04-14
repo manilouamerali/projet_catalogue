@@ -62,11 +62,7 @@ public class UploadPhoto extends HttpServlet {
 					case "lieu":nvelleP.setLieu(item.getString());break;
 					case "nomAuteur":nvellePers.setNomP(item.getString());break;
 					case "prenomAuteur":nvellePers.setPrenomP(item.getString());break;
-					case "emailAuteur":nvellePers.setEmail(item.getString());break;
-					case "titre":nvelleP.setTitre(item.getString());break;
 					case "commentaire":nvelleP.setCommentaire(item.getString());break;
-					case "dimension":nvelleP.setDimension(item.getString());break;
-					case "categorie":nvelleP.setCategorie(item.getString());break;
 					}
 					
 				} else {
@@ -76,13 +72,25 @@ public class UploadPhoto extends HttpServlet {
 					path +="/projet_catalogue/WebContent/WEB-INF/images/";
 					File fullFile = new File(item.getName());
 					path=path+theme+"/";
-					nvelleP.setImg(path+fullFile.getName());
 					File savedFile = new File(path, fullFile.getName());
+					nvelleP.setTitre(fullFile.getName());
 					savedFile.getParentFile().mkdirs();
 					if(!savedFile.exists()) savedFile.createNewFile();
 					item.write(savedFile);
+					
+					//ecriture dans le dossier temporaire
+					path = this.getClass().getResource("/").getPath();
+					path = path.replace("classes/", "images/");
+					path=path+theme+"/";
+					path=path.substring(1, path.length());
+					nvelleP.setImg(path+fullFile.getName());
+					File savedFileTmp = new File(path, fullFile.getName());
+					savedFileTmp.getParentFile().mkdirs();
+					if(!savedFileTmp.exists()) savedFileTmp.createNewFile();
+					item.write(savedFileTmp);
 				}
 			}
+			nvelleP.setAuteur(nvellePers);	
 			gallerie.ajouterPhoto(theme,nvelleP);
 			Catalogue res=null;
 			for(Catalogue c: gallerie.getCatalogues())	

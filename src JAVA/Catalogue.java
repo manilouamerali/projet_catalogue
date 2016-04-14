@@ -33,7 +33,6 @@ public class Catalogue {
 	private String theme;
 	private String dateModif;
 	private List<Photo> photos=new CopyOnWriteArrayList<Photo>();
-	private Node noeudCatalogue;
 	
 	public Catalogue(){}
 	
@@ -119,47 +118,25 @@ public class Catalogue {
 			{
 				if (noeud.getNodeType() == Node.ELEMENT_NODE) {//on est dans catalogue
 					Element eNoeud = (Element) noeud;
-//					System.out.println("Parcours des catalogues : "+ eNoeud.getAttribute("theme"));
 					if(eNoeud.getAttribute("theme").equals(this.theme)){
 						Element newP = document.createElement("photo");
-//						newP.setAttribute("datePrise", p.getDatePrise());
+						newP.setAttribute("datePrise", p.getDatePrise());
+						newP.setAttribute("lieu",p.getLieu());
 						newP.setAttribute("titre", p.getTitre());
-						Element nInfo = document.createElement("img");
-						nInfo.appendChild(document.createTextNode(p.getTitre()));
+						
+						Element nInfo = document.createElement("commentaire");
+						nInfo.appendChild(document.createTextNode(p.getCommentaire()));
 						newP.appendChild(nInfo);
-//						nInfo = document.createElement("dimension");
-//						nInfo.appendChild(document.createTextNode(p.getDimension()));
-//						newP.appendChild(nInfo);
 //						
-//						nInfo = document.createElement("resolution");
-//						nInfo.appendChild(document.createTextNode(Integer.toString(p.getResolution())));
-//						newP.appendChild(nInfo);
-//						nInfo = document.createElement("categorie");
-//						nInfo.appendChild(document.createTextNode(p.getCategorie()));
-//						newP.appendChild(nInfo);
-//						nInfo = document.createElement("commentaire");
-//						nInfo.appendChild(document.createTextNode(p.getCommentaire()));
-//						newP.appendChild(nInfo);
-//						
-//						nInfo = document.createElement("note");
-//						nInfo.appendChild(document.createTextNode(Integer.toString(0)));
-//						newP.appendChild(nInfo);
-//						nInfo = document.createElement("sommeVotes");
-//						nInfo.appendChild(document.createTextNode(Integer.toString(0)));
-//						newP.appendChild(nInfo);
-//						nInfo = document.createElement("nbVotes");
-//						nInfo.appendChild(document.createTextNode(Integer.toString(0)));
-//						newP.appendChild(nInfo);
-//						Element nP = document.createElement("personne");
-//						newP.appendChild(nP);
-//						nInfo = document.createElement("nomP");
-//						nP.appendChild(nInfo);
-//						nInfo = document.createElement("prenomP");
-//						nP.appendChild(nInfo);
-//						nInfo = document.createElement("email");
-//						nP.appendChild(nInfo);		
+						Element nP = document.createElement("personne");
+						newP.appendChild(nP);
+						nInfo = document.createElement("nomP");
+						nInfo.appendChild(document.createTextNode(p.getAuteur().getNomP()));
+						nP.appendChild(nInfo);
+						nInfo = document.createElement("prenomP");
+						nInfo.appendChild(document.createTextNode(p.getAuteur().getPrenomP()));
+						nP.appendChild(nInfo);
 						eNoeud.appendChild(newP);
-//						System.out.println(newP.getNodeName());
 					}
 				}
 				noeud = noeud.getNextSibling();
@@ -184,11 +161,5 @@ public class Catalogue {
 		}
 	}
 	
-	public Node getNoeudCatalogue() {
-		return noeudCatalogue;
-	}
-
-	public void setNoeudCatalogue(Node noeudCatalogue) {
-		this.noeudCatalogue = noeudCatalogue.cloneNode(true);
-	}
+	
 }

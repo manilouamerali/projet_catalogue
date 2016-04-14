@@ -132,11 +132,9 @@ public class Gallerie {
 			String path = this.getClass().getResource("/").getPath();
 			path=path.substring(0, path.lastIndexOf("/.metadata"));
 			document= builder.parse(new File(path+"/projet_catalogue/WebContent/Catalogue.xml"));
-			//document= builder.parse(new File(path+"Catalogue.xml"));
-//			document= builder.parse(new File("C:/Users/Imen/Desktop/GIT/Nouveau dossier/Catalogue/WebContent/"+"Catalogue.xml"));
-
+			
 			Source input = new DOMSource(document);
-			Result output = new StreamResult(new File("path"+"/projet_catalogue/WebContent/Catalogue.xml"));			
+			Result output = new StreamResult(new File(path+"/projet_catalogue/WebContent/Catalogue.xml"));			
 			final Element racine = document.getDocumentElement();
 			
 			Node catalogue= racine.getFirstChild().getNextSibling(); 
@@ -187,7 +185,6 @@ public class Gallerie {
 				else
 					catalogue = catalogue.getNextSibling();
 			}
-			System.out.println(input.getSystemId()+"   "+output.getSystemId());
 
 			transformer.transform(input, output);
 		} catch (ParserConfigurationException | SAXException | IOException | TransformerFactoryConfigurationError | TransformerException e) {
@@ -228,8 +225,6 @@ public class Gallerie {
 						Element eAuteur= (Element) auteurCatal;
 						pAuteur.setNomP(eAuteur.getElementsByTagName("nomP").item(0).getTextContent());
 						pAuteur.setPrenomP(eAuteur.getElementsByTagName("prenomP").item(0).getTextContent());
-						pAuteur.setEmail(eAuteur.getElementsByTagName("email").item(0).getTextContent());
-						//System.out.println("nomAuteur: " + pAuteur.getNomP());
 					}
 					
 					cat.setAuteur(pAuteur);
@@ -239,45 +234,28 @@ public class Gallerie {
 							photo= photo.getNextSibling().getNextSibling()) {
 					        
 						String pathImg = this.getClass().getResource("/").getPath();
-						pathImg=pathImg.substring(1, pathImg.lastIndexOf("/.metadata"));
-						pathImg+="/projet_catalogue/WebContent/WEB-INF/images/";
+						pathImg=pathImg.replace("classes/", "images/");
+						
 						pathImg+=cat.getTheme()+"/";
-						
-						
+						pathImg=pathImg.substring(1, pathImg.length());
 						Photo p=new Photo();
 						p.setCat(cat.getTheme());
 						cat.ajouterPhoto(p);
-						//System.out.println(photo.getNodeName());
 						if (photo.getNodeType() == Node.ELEMENT_NODE) {
 							Element ePhoto= (Element) photo;
-
-							//System.out.println("\nCurrent Element :"+ePhoto.getAttribute("nomAuteur"));
-
 							p.setDatePrise(ePhoto.getAttribute("datePrise"));
-
-							//System.out.println(ePhoto.getAttribute("lieu"));
-
 							p.setLieu(ePhoto.getAttribute("lieu"));
 							p.setTitre(ePhoto.getAttribute("titre"));
+							p.setImg(pathImg+ePhoto.getAttribute("titre"));
 
-							p.setCategorie(ePhoto.getElementsByTagName("categorie").item(0).getTextContent());
-							
-							String titre=ePhoto.getElementsByTagName("img").item(0).getTextContent();
-							p.setImg(pathImg+titre);
-							p.setDateAjout(ePhoto.getElementsByTagName("dateAjout").item(0).getTextContent());
-							p.setDimension(ePhoto.getElementsByTagName("dimension").item(0).getTextContent());
-							p.setResolution(Integer.parseInt(ePhoto.getElementsByTagName("resolution").item(0).getTextContent()));
 							p.setCommentaire(ePhoto.getElementsByTagName("commentaire").item(0).getTextContent());
-							
 							Node auteurPhoto= ePhoto.getElementsByTagName("personne").item(0);
-							
 							if (auteurPhoto.getNodeType() == Node.ELEMENT_NODE) {//on est dans auteur
 								Element eAuteur= (Element) auteurPhoto;
 								Personne pAuteurPhoto=new Personne();
 								p.setAuteur(pAuteurPhoto);
 								pAuteurPhoto.setNomP(eAuteur.getElementsByTagName("nomP").item(0).getTextContent());
 								pAuteurPhoto.setPrenomP(eAuteur.getElementsByTagName("prenomP").item(0).getTextContent());
-								pAuteurPhoto.setEmail(eAuteur.getElementsByTagName("email").item(0).getTextContent());
 								if(photosAuteur.containsKey(pAuteurPhoto.getPrenomP()+pAuteurPhoto.getNomP())){
 									photosAuteur.get(pAuteurPhoto.getPrenomP()+pAuteurPhoto.getNomP()).add(p);
 								}
@@ -309,7 +287,15 @@ public class Gallerie {
 		for(Catalogue c: catalogues)
 			if(c.getTheme().equals(theme)){				
 				c.ecrireXML(nvelleP);
-				//photosAuteur.get(nvelleP.getAuteur()).add(nvelleP);
+				if(photosAuteur.containsKey(nvelleP.getAuteur().getPrenomP()+nvelleP.getAuteur().getNomP())){
+					photosAuteur.get(nvelleP.getAuteur().getPrenomP()+nvelleP.getAuteur().getNomP()).add(nvelleP);
+				}
+				else{
+					List<Photo> l = new CopyOnWriteArrayList<Photo>();
+					l.add(nvelleP);
+					photosAuteur.put(nvelleP.getAuteur().getPrenomP()+nvelleP.getAuteur().getNomP(), l);
+				}
+				
 				c.getPhotos().add(nvelleP);
 				break;
 			}

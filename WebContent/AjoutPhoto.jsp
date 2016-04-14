@@ -18,13 +18,7 @@
 	                	 <span class="requis">Emplacement du fichier</span>
 	                	  <input type="file" id="fichier" name="fichier" />
 	                </label>
-	               
-	                               
-	                <label for="titre">
-	                	<span>Titre</span>
-	                	<input type="text" id="titre" name="titre" />
-	                </label>
-	                
+	              	                
 					<label for="datePrise">
 						<span>Date de prise</span>
 	               		<input type="text" id="datePrise" name="datePrise" />
@@ -36,12 +30,7 @@
 						<input type="text" id="lieu" name="lieu" />
 					</label>
 	                
-					
-					<label for="dimension">
-						<span>Dimension</span>
-	                	<input type="text" id="dimension" name="dimension" />
-	                </label>
-
+				
 	                
 	                <label for="nomAuteur">
 	               		<span>Nom de l'auteur</span>

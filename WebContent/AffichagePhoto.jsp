@@ -20,13 +20,10 @@
 			<h3>date de prise</h3>
 			<h2>${photo.datePrise}</h2>
 		</div>
-		<div class="tt">
-			<h3>dimensions</h3>
-			<h2>${photo.dimension}</h2>
-		</div>
+		
 		<div class="tt">
 			<h3>lieu</h3>
-			<h2>${photo.lieu}</h2>
+			<h2>${photo.img}</h2>
 		</div>
 		
 		<div class="auteur">

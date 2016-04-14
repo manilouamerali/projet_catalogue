@@ -12,30 +12,20 @@
 	      				<xs:sequence>
 	        				<xs:element type="xs:string" name="nomP" minOccurs='1' maxOccurs='1'/>
 	        				<xs:element type="xs:string" name="prenomP" minOccurs='1' maxOccurs='1'/>
-	        				<xs:element type="xs:string" name="email" minOccurs='0' maxOccurs='1'/>
 	  					</xs:sequence>
 	  				</xs:complexType>
 	  			</xs:element>
 	        <xs:element name="photo" minOccurs="0" maxOccurs="1000">
 	          <xs:complexType mixed="true">
 	            <xs:sequence>
-	              <xs:element type="xs:anyURI" name="img"/>
-	              <xs:element type="xs:date" name="dateAjout"/>
 	              <!-- <xs:element type="xs:string" name="titre"/> -->
-	              <xs:element type="xs:string" name="dimension"/> <!--  a vérifer -->
-	              <xs:element type="xs:decimal" name="resolution"/>
-	              <xs:element type="xs:string" name="categorie"/>
 	              <xs:element type="xs:string" name="commentaire"/>
-				  <xs:element type="xs:decimal" name="note"/>
-				  <xs:element type="xs:decimal" name="sommeVotes"/>
-				  <xs:element type="xs:decimal" name="nbVotes"/>
 				  
 				  <xs:element name="personne" minOccurs="1" maxOccurs="1">
 				    <xs:complexType mixed="true">
 	      				<xs:sequence>
 	        				<xs:element type="xs:string" name="nomP" minOccurs='1' maxOccurs='1'/>
 	        				<xs:element type="xs:string" name="prenomP" minOccurs='1' maxOccurs='4'/>
-	        				<xs:element type="xs:string" name="email" minOccurs='1' maxOccurs='1'/>
 	  					</xs:sequence>
 	  				</xs:complexType>
 	  			</xs:element>  	  
